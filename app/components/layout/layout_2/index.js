@@ -149,18 +149,24 @@ const styles = {
 };
 
 class Paperbase extends React.Component {
+ 
     state = {
         mobileOpen: false,
     };
-
+    
+ 
     handleDrawerToggle = () => {
         this.setState(state => ({ mobileOpen: !state.mobileOpen }));
     };
 
-    render() {
-        const { classes } = this.props;
 
+    render() {
+        const { classes,url } = this.props;
+    
         return (
+            <div>
+                
+         
             <MuiThemeProvider theme={theme}>
          
                 <div className={classes.root}>
@@ -172,20 +178,22 @@ class Paperbase extends React.Component {
                                 variant="temporary"
                                 open={this.state.mobileOpen}
                                 onClose={this.handleDrawerToggle}
+                                
                             />
                         </Hidden>
                         <Hidden xsDown implementation="css">
-                            <Navigator PaperProps={{ style: { width: drawerWidth } }} />
+                            <Navigator PaperProps={{ style: { width: drawerWidth } }}  url={url} />
                         </Hidden>
                     </nav>
                     <div className={classes.appContent}>
-                        <Header onDrawerToggle={this.handleDrawerToggle} />
+                            <Header onDrawerToggle={this.handleDrawerToggle}/>
                         <main className={classes.mainContent}>
                             {this.props.children}
                         </main>
                     </div>
                 </div>
             </MuiThemeProvider>
+            </div>
         );
     }
 }

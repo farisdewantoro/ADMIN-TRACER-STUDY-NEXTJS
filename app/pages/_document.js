@@ -9,6 +9,9 @@ class MyDocument extends Document {
 
         return (
             <html lang="en" dir="ltr">
+                <title>
+                    ADMIN-TRACER-STUDY
+                </title>
                 <Head>
                     <meta charSet="utf-8" />
                     {/* Use minimum-scale=1 to enable GPU rasterization */}
@@ -25,6 +28,12 @@ class MyDocument extends Document {
                         rel="stylesheet"
                         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500"
                     />
+              
+          
+                    <meta name="title" content='ADMIN-TRACER-STUDY' />
+                    <meta name="keywords" content='ADMIN-TRACER-STUDY ITENAS' />
+     
+            
                 </Head>
                 <body>
                     <Main />

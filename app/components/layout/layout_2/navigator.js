@@ -19,28 +19,9 @@ import TimerIcon from '@material-ui/icons/Timer';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-const categories = [
-    {
-        id: 'Develop',
-        children: [
-            { id: 'Authentication', icon: <PeopleIcon />, active: true },
-            { id: 'Database', icon: <DnsRoundedIcon /> },
-            { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-            { id: 'Hosting', icon: <PublicIcon /> },
-            { id: 'Functions', icon: <SettingsEthernetIcon /> },
-            { id: 'ML Kit', icon: <SettingsInputComponentIcon /> },
-        
-        ],
-    },
-    {
-        id: 'Quality',
-        children: [
-            { id: 'Analytics', icon: <SettingsIcon /> },
-            { id: 'Performance', icon: <TimerIcon /> },
-            { id: 'Test Lab', icon: <PhonelinkSetupIcon /> },
-        ],
-    },
-];
+import EventNoteIcon from '@material-ui/icons/EventNote'
+import Link from 'next/link';
+
 
 const styles = theme => ({
     categoryHeader: {
@@ -88,15 +69,18 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-    const { classes, ...other } = props;
+    
+    const { classes, url, ...other } = props;
+
     const listMenu = [
-        { id: 'Identitas', icon: <PeopleIcon />, active: true },
-        { id: 'Data Alumni', icon: <DnsRoundedIcon /> },
-        { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-        { id: 'Hosting', icon: <PublicIcon /> },
-        { id: 'Functions', icon: <SettingsEthernetIcon /> },
-        { id: 'ML Kit', icon: <SettingsInputComponentIcon /> },
-        { id: 'Logout', icon: <ExitToAppIcon /> }
+        { id: 'Identitas', icon: <PeopleIcon />, link:'/identitas',},
+        { id: 'Data Alumni', icon: <DnsRoundedIcon />,link:'/data-alumni' },
+        {id:'Data Quisoner', icon:<EventNoteIcon/>,link:'/data-quisoner'}
+        // { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
+        // { id: 'Hosting', icon: <PublicIcon /> },
+        // { id: 'Functions', icon: <SettingsEthernetIcon /> },
+        // { id: 'ML Kit', icon: <SettingsInputComponentIcon /> },
+        // { id: 'Logout', icon: <ExitToAppIcon /> }
     ];
     return (
         <Drawer variant="permanent" {...other}>
@@ -107,7 +91,7 @@ function Navigator(props) {
             
              
                     <React.Fragment >
-                        <ListItem className={classes.categoryHeader}>
+                    <ListItem className={classes.categoryHeader}  >
                             <ListItemText
                                 classes={{
                                     primary: classes.categoryHeaderPrimary,
@@ -116,27 +100,31 @@ function Navigator(props) {
                                {/* Tracer Study Itenas */}
                             </ListItemText>
                         </ListItem>
-                        {listMenu.map(({ id: childId, icon, active }) => (
-                            <ListItem
-                                button
-                                dense
-                                key={childId}
-                                className={classNames(
-                                    classes.item,
-                                    classes.itemActionable,
-                                    active && classes.itemActiveItem,
-                                )}
-                            >
-                                <ListItemIcon>{icon}</ListItemIcon>
-                                <ListItemText
-                                    classes={{
-                                        primary: classes.itemPrimary,
-                                        textDense: classes.textDense,
-                                    }}
+                        {listMenu.map(({ id: childId, icon,link }) => (
+                            <Link href={link} key={childId}>
+                                <ListItem
+                                    button
+                                    dense
+                                    key={childId}
+                                    className={classNames(
+                                        classes.item,
+                                        classes.itemActionable,
+                                        url === link && classes.itemActiveItem,
+                                    )}
+
                                 >
-                                    {childId}
-                                </ListItemText>
-                            </ListItem>
+                                    <ListItemIcon>{icon}</ListItemIcon>
+                                    <ListItemText
+                                        classes={{
+                                            primary: classes.itemPrimary,
+                                            textDense: classes.textDense,
+                                        }}
+                                    >
+                                        {childId}
+                                    </ListItemText>
+                                </ListItem>
+                            </Link>
+                    
                         ))}
                         <Divider className={classes.divider} />
                     </React.Fragment>

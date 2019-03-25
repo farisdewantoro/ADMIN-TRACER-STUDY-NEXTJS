@@ -4,4 +4,17 @@ module.exports = routes()
     .add('home','/','index')
     .add('login')
     .add('tes','/login/tes','dashboard')
-    .add('identitas', '/identitas', 'identitas');
+    .add('identitas', '/identitas', 'identitas')
+    .add('dataAlumni','/data-alumni','dataAlumni')
+    .add('addDataAlumni','/data-alumni/create','dataAlumni/create')
+    .add('dataQuisoner', '/data-quisoner', 'quisoner')
+    .add('editQuisoner', '/data-quisoner/edit', 'quisoner/editQuisoner')
+    ;
+
+// module.exports=()=>{
+//     return{
+//         "/":{page:"/"},
+//         "login":{page:"/login"},
+//         "/404":{page:"/404"}
+//     }
+// }

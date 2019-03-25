@@ -45,8 +45,9 @@ class Identitas extends Component {
     const { classes } = this.props;
     const {nrp,nama,email,jurusan,alamat,noTelepon,kodePIN} = this.state.mahasiswa;
     return (
-      <div>
+     
         <Layout2>
+        <div>
             <Grid container >
                 <Grid item xs={12}>
               <Card>
@@ -155,9 +156,10 @@ class Identitas extends Component {
               </Card>
                 </Grid>
             </Grid>
+        </div>
         </Layout2>
 
-      </div>
+     
     )
   }
 }
