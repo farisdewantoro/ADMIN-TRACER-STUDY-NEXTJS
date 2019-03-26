@@ -211,7 +211,7 @@ const components = {
 };
 
 const SelectSelect = (props)=>{
-    const { classes, theme,jurusans } = props;
+    const { classes, theme, jurusans, handlerChangeJurusan,jurusan } = props;
 
     const selectStyles = {
         input: base => ({
@@ -231,8 +231,8 @@ const SelectSelect = (props)=>{
                     styles={selectStyles}
                     options={jurusans}
                     components={components}
-                    // value={this.state.single}
-                    // onChange={this.handleChange('single')}
+                    value={jurusan}
+                    onChange={handlerChangeJurusan}
                     isClearable
                     placeholder=""
                     textFieldProps={{

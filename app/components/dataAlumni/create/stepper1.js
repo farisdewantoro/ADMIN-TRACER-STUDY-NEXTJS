@@ -19,7 +19,8 @@ const ListJurusan = (jurusans)=>{
     if(jurusans.jurusan){
        return jurusans.jurusan.map(j => {
             return {
-                label:j.nama
+                label:j.nama,
+                value:j.id
             }
         })
     }else{
@@ -38,7 +39,7 @@ const Stepper1 = (props) => {
             noTelepon,
             kodePIN
         } = props.mahasiswa;
-    const { classes, handlerChange, errors, jurusans } = props;
+    const { classes, handlerChange, errors, jurusans, handlerChangeJurusan } = props;
  
         return (
       
@@ -104,7 +105,11 @@ const Stepper1 = (props) => {
                                         fullWidth
                                         margin="normal"
                                     />
-                                <Select jurusans={ListJurusan(jurusans)}/>
+                                <Select 
+                                jurusans={ListJurusan(jurusans)}
+                                jurusan={jurusan}
+                                handlerChangeJurusan={handlerChangeJurusan}
+                                />
                                     <TextField
                                         label="No Telepon"
                                         name="noTelepon"

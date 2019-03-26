@@ -84,7 +84,7 @@ function Header(props) {
             >
                 <Tabs value={0} textColor="inherit">
                     <Tab textColor="inherit" label="Users" />
-                    <Tab textColor="inherit" label="Sign-in method" />
+                    <Tab textColor="inherit" label="Tambah Data" />
                     <Tab textColor="inherit" label="Templates" />
                     <Tab textColor="inherit" label="Usage" />
                 </Tabs>

@@ -5,6 +5,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
 import Navigator from './navigator';
 import Header from './header';
+import Snackbars from '../../common/Snackbars';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
 let theme = createMuiTheme({
     typography: {
         useNextVariants: true,
@@ -161,7 +164,7 @@ class Paperbase extends React.Component {
 
 
     render() {
-        const { classes,url } = this.props;
+        const { classes,url,notifications } = this.props;
     
         return (
             <div>
@@ -189,6 +192,7 @@ class Paperbase extends React.Component {
                             <Header onDrawerToggle={this.handleDrawerToggle}/>
                         <main className={classes.mainContent}>
                             {this.props.children}
+                                <Snackbars notification={notifications} />
                         </main>
                     </div>
                 </div>
@@ -202,4 +206,8 @@ Paperbase.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Paperbase);
+const mapStateToProps = (state)=>({
+    notifications:state.notifications
+})
+
+export default compose(connect(mapStateToProps),withStyles(styles))(Paperbase);

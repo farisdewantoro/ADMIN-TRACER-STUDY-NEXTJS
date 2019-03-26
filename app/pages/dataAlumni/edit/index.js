@@ -24,7 +24,7 @@ function getSteps() {
 
 
 
-class CreateDataAlumni extends React.Component {
+class EditDataAlumni extends React.Component {
     state = {
         activeStep: 0,
         skipped: new Set(),
@@ -46,6 +46,7 @@ class CreateDataAlumni extends React.Component {
     };
     componentDidMount(){
         this.props.getAllJurusan();
+        console.log(this.props);
     }
     handlerChangeMahasiswa = (e) => {
         let name = e.target.name;
@@ -250,7 +251,7 @@ class CreateDataAlumni extends React.Component {
     }
 }
 
-CreateDataAlumni.propTypes = {
+EditDataAlumni.propTypes = {
     classes: PropTypes.object.isRequired,
     createMahasiswa:PropTypes.func.isRequired,
     getAllJurusan: PropTypes.func.isRequired,
@@ -270,4 +271,4 @@ export default compose(
     withStyles(styles),
     connect(mapStateToProps, { createMahasiswa, getAllJurusan})
     )
-(CreateDataAlumni);
+(EditDataAlumni);

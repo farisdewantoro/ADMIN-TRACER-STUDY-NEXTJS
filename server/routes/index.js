@@ -7,10 +7,12 @@ module.exports = routes()
     .add('identitas', '/identitas', 'identitas')
     .add('dataAlumni','/data-alumni','dataAlumni')
     .add('addDataAlumni','/data-alumni/create','dataAlumni/create')
+    .add('EditDataMahasiswa', '/data-alumni/edit/:nrp', 'dataAlumni/edit')
     .add('dataQuisoner', '/data-quisoner', 'quisoner')
     .add('editQuisoner', '/data-quisoner/edit', 'quisoner/editQuisoner')
     .add('dataJurusan','/data-jurusan','dataJurusan')
     .add('CreateDataJurusan', '/data-jurusan/create', 'dataJurusan/create')
+ 
     ;
 
 // module.exports=()=>{

@@ -1,15 +1,33 @@
 import {
     GET_ERRORS,
     REMOVE_ERRORS,
-    LOADING_MAHASISWA
+    MAHASISWA
 } from './types';
 import { setNotification } from './notifActions';
 import axios from 'axios';
 
 export const loadingMahasiswa = () => {
     return {
-        type: LOADING_MAHASISWA
+        type: MAHASISWA.loading
     }
+}
+
+export const getAllMahasiswa = ()=>disbatch=>{
+    axios.get('/api/mahasiswa/get-all')
+        .then(res=>{
+            disbatch({
+                type:MAHASISWA.getAll,
+                payload:res.data
+            })
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
 }
 
 export const createMahasiswa = (data) => disbatch => {
@@ -17,14 +35,13 @@ export const createMahasiswa = (data) => disbatch => {
     disbatch(loadingMahasiswa());
     axios.post('/api/mahasiswa/create', data)
         .then(res => {
-            if (res.data.notification) {
-                disbatch(setNotification(res.data.notification));
+       
+            let notification = {
+                error: false,
+                message: "Success !",
+                notification: true
             }
-            console.log(res.data.data);
-            // disbatch({
-            //     type: AUTH_SET_USER,
-            //     payload: res.data.data
-            // });
+            disbatch(setNotification(notification));
         })
         .catch(err => {
             if (err.response) {
@@ -35,7 +52,7 @@ export const createMahasiswa = (data) => disbatch => {
             }
             let notification = {
                 error: true,
-                message: "There is an error !",
+                message: "Error !",
                 notification: true
             }
             disbatch(setNotification(notification));

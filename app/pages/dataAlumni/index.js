@@ -6,14 +6,32 @@ import {
   Grid,
   Card,
   CardContent,
-  Button
+  Button,
+  CardMedia,
+  Typography,
+  Divider,
+  IconButton,
+  Paper,
+  InputBase,
+  TextField
 } from '@material-ui/core';
+import CreateIcon from '@material-ui/icons/Create';
 import Link from 'next/link';
+import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import { getAllMahasiswa} from '../../actions/MahasiswaActions';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import DirectionsIcon from '@material-ui/icons/Directions';
+import moment from 'moment';
 class DataAlumni extends Component {
-
+  componentDidMount(){
+    this.props.getAllMahasiswa();
+  }
 
   render() {
-
+    const {classes,mahasiswas} = this.props;
     return (
       <Layout2 url={'/data-alumni'}>
         <div>
@@ -26,13 +44,88 @@ class DataAlumni extends Component {
             </Link>
      
           </Grid>
-            <Grid item xs={12}>
-              <Card>
-                <CardContent>
+          <Grid item xs={12}>
+              <Paper className={classes.root} elevation={1}>
+                {/* <IconButton className={classes.iconButton} aria-label="Menu">
+                  <MenuIcon />
+                </IconButton> */}
+                <IconButton className={classes.iconButton} aria-label="Search">
+                  <SearchIcon />
+                </IconButton>
+                <Divider className={classes.divider} />
+                <InputBase className={classes.input} placeholder="Search " />
+         
+                <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
+                  <DirectionsIcon />
+                </IconButton>
+              </Paper>
+          </Grid>
+            {mahasiswas.mahasiswa.map((m,i)=>{
+              return(
+                <Grid item xs={12} key={m.id}>
+                  <Card className={classes.card}>
+                    <CardMedia
+                      className={classes.cover}
+                      image="/static/noImage.png"
+                      title="Live from space album cover"
+                    />
+                    <div className={classes.details}>
+                      <CardContent className={classes.content}>
+                        <Grid container alignItems="center" direction="row" spacing={12}>
+                          <Grid item md={12}>
+                            <Typography variant="h6" color="primary">
+                            {m.nama}
+                   </Typography>
+                          </Grid>
+                          <Grid item md={12}>
+                            <div className={classes.box}>
+                              <div className={classes.card}>
+                                <Typography className={classes.ListParent}>
+                                  NRP :
+                   </Typography>
+                                <Typography className={classes.listChild}>
+                                  {m.nrp}
+                   </Typography>
 
-                </CardContent>
-              </Card>
-            </Grid>
+                                <Typography className={classes.ListParent}>
+                                  Jurusan :
+                   </Typography>
+                                <Typography className={classes.listChild}>
+                                  {m.jurusan}
+                   </Typography>
+
+                                <Typography className={classes.ListParent}>
+                                  Tanggal Lulus :
+                   </Typography>
+                                <Typography className={classes.listChild}>
+                                  {moment(m.tanggalLulus).format('LL')}
+                   </Typography>
+
+
+                              </div>
+
+                              <div className={classes.action}>
+                              <a href={`/data-alumni/edit/${m.nrp}`}>
+                                <IconButton>
+                                  <CreateIcon />
+                                </IconButton>
+                                </a>
+                              </div>
+
+
+                            </div>
+
+                          </Grid>
+
+                        </Grid>
+
+                      </CardContent>
+                    </div>
+                  </Card>
+                </Grid>
+              )
+            })}
+            
           </Grid>
         </div>
       </Layout2>
@@ -41,4 +134,16 @@ class DataAlumni extends Component {
   }
 }
 
-export default withStyles(styles)(DataAlumni);
+
+DataAlumni.propTypes={
+  getAllMahasiswa:PropTypes.func.isRequired,
+  mahasiswas:PropTypes.object.isRequired,
+  classes:PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state)=>({
+  mahasiswas:state.mahasiswas
+});
+
+
+export default compose(connect(mapStateToProps, { getAllMahasiswa}),withStyles(styles))(DataAlumni);

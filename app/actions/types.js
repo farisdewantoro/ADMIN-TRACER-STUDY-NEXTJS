@@ -9,7 +9,10 @@ export const SET_NOTIFICATION = 'SET_NOTIFICATION';
 export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 
 // Mahasiswa
-export const LOADING_MAHASISWA = 'LOADING_MAHASISWA';
+export const MAHASISWA = {
+    loading:'MAHASISWA:LOADING',
+    getAll:'MAHASISWA:GETALL'
+};
 
 // export const GET_ALL_JURUSAN = 'GET_ALL_JURUSAN';
 

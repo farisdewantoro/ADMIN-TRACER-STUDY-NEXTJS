@@ -11,8 +11,10 @@ class AppRouter{
     }
     buildRoutes(){
         this.router.post("/api/auth/login",AuthController.signin);
-        this.router.post('/api/mahasiswa/create',MahasiswaController.create);
         this.router.get('/api/jurusan/get-all',JurusanController.getAll);
+
+        this.router.post('/api/mahasiswa/create', MahasiswaController.create);
+        this.router.get('/api/mahasiswa/get-all', MahasiswaController.getAll);
     }
 }
 

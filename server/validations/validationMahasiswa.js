@@ -8,7 +8,7 @@ class ValidationMahasiswa{
             lulusan:{},
             mahasiswa:{}
         }
-
+         let dateNow = new Date();
         data.mahasiswa.nrp = !isEmpty(data.mahasiswa.nrp) ? data.mahasiswa.nrp : '';
         if (Validator.isEmpty(data.mahasiswa.nrp.toString())) errors.mahasiswa.nrp = '*Harus diisi';
 
@@ -38,10 +38,11 @@ class ValidationMahasiswa{
          if (Validator.isEmpty(data.lulusan.judulTA.toString())) errors.lulusan.judulTA = '*Harus diisi';
         
          data.lulusan.tanggalLulus = !isEmpty(data.lulusan.tanggalLulus) ? data.lulusan.tanggalLulus : '';
-         if (Validator.isEmpty(data.lulusan.tanggalLulus) ) errors.lulusan.tanggalLulus = '*Harus diisi';
-         if (!Validator.isEmpty(data.lulusan.tanggalLulus) && !Validator.isBefore(data.lulusan.tanggalLulus, new Date())) errors.lulusan.tanggalLulus = '*Harus diisi';
+         if (Validator.isEmpty(data.lulusan.tanggalLulus.toString()) ) errors.lulusan.tanggalLulus = '*Harus diisi';
 
-         data.lulusan.lamaTA = !isEmpty(data.lulusan.lamaTA) ? data.lulusan.lamaTA : '';
+         if (!Validator.isEmpty(data.lulusan.tanggalLulus.toString()) && !Validator.isBefore(data.lulusan.tanggalLulus, dateNow.toDateString())) errors.lulusan.tanggalLulus = '*Tanggal tidak valid';
+
+         data.lulusan.lamaTA = !isEmpty(data.lulusan.lamaTA.toString()) ? data.lulusan.lamaTA : '';
          if (Validator.isEmpty(data.lulusan.lamaTA.toString())) errors.lulusan.lamaTA = '*Harus diisi';
 
          if (Object.keys(errors.lulusan).length === 0){
