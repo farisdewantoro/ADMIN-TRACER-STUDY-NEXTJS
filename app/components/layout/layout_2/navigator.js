@@ -18,8 +18,9 @@ import SettingsInputComponentIcon from '@material-ui/icons/SettingsInputComponen
 import TimerIcon from '@material-ui/icons/Timer';
 import SettingsIcon from '@material-ui/icons/Settings';
 import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp'
-import EventNoteIcon from '@material-ui/icons/EventNote'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EventNoteIcon from '@material-ui/icons/EventNote';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import Link from 'next/link';
 
 
@@ -75,7 +76,8 @@ function Navigator(props) {
     const listMenu = [
         { id: 'Identitas', icon: <PeopleIcon />, link:'/identitas',},
         { id: 'Data Alumni', icon: <DnsRoundedIcon />,link:'/data-alumni' },
-        {id:'Data Quisoner', icon:<EventNoteIcon/>,link:'/data-quisoner'}
+        {id:'Data Quisoner', icon:<EventNoteIcon/>,link:'/data-quisoner'},
+        { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' }
         // { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
         // { id: 'Hosting', icon: <PublicIcon /> },
         // { id: 'Functions', icon: <SettingsEthernetIcon /> },

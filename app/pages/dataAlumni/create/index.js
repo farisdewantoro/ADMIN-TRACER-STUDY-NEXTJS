@@ -14,7 +14,10 @@ import Layout2 from '../../../components/layout/layout_2';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import styles from './styles';
-
+import {createMahasiswa} from '.././../../actions/MahasiswaActions';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import { getAllJurusan } from '../../../actions/JurusanActions';
 function getSteps() {
     return ['DATA MAHASISWA', 'DATA LULUSAN'];
 }
@@ -41,15 +44,28 @@ class CreateDataAlumni extends React.Component {
             tanggalLulus: ''
         }
     };
+    componentDidMount(){
+        this.props.getAllJurusan();
+    }
     handlerChangeMahasiswa = (e) => {
         let name = e.target.name;
         let value = e.target.value;
         this.setState(prevState => ({
             mahasiswa: {
-                ...prevState,
+                ...prevState.mahasiswa,
                 [name]: value
             }
         }));
+    }
+
+    componentWillReceiveProps(nextProps){
+        if(nextProps.errors !== this.props.errors){
+            if(Object.keys(nextProps.errors).length > 0){
+                this.setState({
+                    activeStep:0
+                })
+            }
+        }
     }
 
     handlerChangeLulusan = (e)=>{
@@ -57,9 +73,10 @@ class CreateDataAlumni extends React.Component {
         let value = e.target.value;
         this.setState(prevState => ({
             lulusan: {
-                ...prevState,
+                ...prevState.lulusan,
                 [name]: value
             }
+         
         }));
     }
 
@@ -70,6 +87,8 @@ class CreateDataAlumni extends React.Component {
                     <Stepper1
                     mahasiswa={this.state.mahasiswa}
                     handlerChange={this.handlerChangeMahasiswa}
+                    errors={this.props.errors}
+                    jurusans={this.props.jurusans}
                     />
                 );
             case 1:
@@ -77,6 +96,7 @@ class CreateDataAlumni extends React.Component {
                     <Stepper2 
                         lulusan={this.state.lulusan}
                         handlerChange={this.handlerChangeLulusan}
+                        errors={this.props.errors}
                     />
                 );
             default:
@@ -87,10 +107,28 @@ class CreateDataAlumni extends React.Component {
 
     handleNext = () => {
         const { activeStep } = this.state;
-        this.setState({
-            activeStep: activeStep + 1,
-        });
+        if (activeStep === getSteps().length - 1) {
+            this.handleFinishSubmit();
+        }else{
+            this.setState({
+                activeStep: activeStep + 1,
+            });
+        }
+       
+     
+
     };
+
+    handleFinishSubmit = ()=>{
+        let mahasiswa = this.state.mahasiswa;
+        let lulusan = this.state.lulusan;
+        let data={
+            mahasiswa,
+            lulusan
+        }
+
+        this.props.createMahasiswa(data);
+    }
 
     handleBack = () => {
         this.setState(state => ({
@@ -128,7 +166,7 @@ class CreateDataAlumni extends React.Component {
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
-
+        console.log(this.state);
         return (
             <Layout2 url={'/data-alumni'}>
                 <div className={classes.root}>
@@ -195,7 +233,21 @@ class CreateDataAlumni extends React.Component {
 }
 
 CreateDataAlumni.propTypes = {
-    classes: PropTypes.object,
+    classes: PropTypes.object.isRequired,
+    createMahasiswa:PropTypes.func.isRequired,
+    getAllJurusan: PropTypes.func.isRequired,
+    errors:PropTypes.object.isRequired,
+    jurusans:PropTypes.object.isRequired
+
 };
 
-export default withStyles(styles)(CreateDataAlumni);
+const mapStateToProps = (state) =>({
+    errors:state.errors,
+    jurusans:state.jurusans
+})
+
+export default compose(
+    withStyles(styles),
+    connect(mapStateToProps, { createMahasiswa, getAllJurusan})
+    )
+(CreateDataAlumni);

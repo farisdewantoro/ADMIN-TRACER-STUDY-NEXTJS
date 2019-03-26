@@ -14,6 +14,20 @@ import {
 }
     from '@material-ui/core';
 
+const ListJurusan = (jurusans)=>{
+
+    if(jurusans.jurusan){
+       return jurusans.jurusan.map(j => {
+            return {
+                label:j.nama
+            }
+        })
+    }else{
+        return [];
+    }
+
+}
+
 const Stepper1 = (props) => {
 
         const { nrp,
@@ -24,9 +38,10 @@ const Stepper1 = (props) => {
             noTelepon,
             kodePIN
         } = props.mahasiswa;
-    const { classes, handlerChange } = props;
+    const { classes, handlerChange, errors, jurusans } = props;
+ 
         return (
-    
+      
                 <div className={classes.rootTambahData}>
                     <Grid container direction="column">
                         <Grid item xs={12}>
@@ -35,11 +50,13 @@ const Stepper1 = (props) => {
                                     <TextField
                                         label="NRP"
                                         name="nrp"
-                                    type="number"
+                                        type="number"
                                         value={nrp}
                                         InputLabelProps={
                                             { shrink: true }
                                         }
+                                        error={errors.mahasiswa && typeof errors.mahasiswa.nrp !== "undefined"}
+                                    helperText={errors.mahasiswa  && typeof errors.mahasiswa.nrp !== "undefined" ? errors.mahasiswa.nrp : ''}
                                         onChange={handlerChange}
                                         fullWidth
                                         margin="normal"
@@ -49,6 +66,8 @@ const Stepper1 = (props) => {
                                         label="Nama Mahasiswa"
                                         name="nama"
                                         value={nama}
+                                    error={ errors.mahasiswa && typeof errors.mahasiswa.nama !== "undefined"}
+                                    helperText={ errors.mahasiswa && typeof errors.mahasiswa.nama !== "undefined" ? errors.mahasiswa.nama : ''}
                                         InputLabelProps={
                                             { shrink: true }
                                         }
@@ -60,6 +79,9 @@ const Stepper1 = (props) => {
                                         label="Email"
                                         name="email"
                                         value={email}
+                                    error={errors.mahasiswa && errors.mahasiswa.email !== "undefined"}
+                                    helperText={ errors.mahasiswa && typeof errors.mahasiswa.email !== "undefined" ? errors.mahasiswa.email : ''}
+
                                         InputLabelProps={
                                             { shrink: true }
                                         }
@@ -72,6 +94,9 @@ const Stepper1 = (props) => {
                                         name="kodePIN"
                                         value={kodePIN}
                                         type="number"
+                                    error={ errors.mahasiswa && typeof errors.mahasiswa.kodePIN !== "undefined"}
+                                    helperText={errors.mahasiswa && typeof errors.mahasiswa.kodePIN !== "undefined" ? errors.mahasiswa.kodePIN : ''}
+
                                         InputLabelProps={
                                             { shrink: true }
                                         }
@@ -79,10 +104,13 @@ const Stepper1 = (props) => {
                                         fullWidth
                                         margin="normal"
                                     />
-                                    <Select />
+                                <Select jurusans={ListJurusan(jurusans)}/>
                                     <TextField
                                         label="No Telepon"
                                         name="noTelepon"
+                                    error={errors.mahasiswa && typeof errors.mahasiswa.noTelepon !== "undefined"}
+                                    helperText={errors.mahasiswa && typeof errors.mahasiswa.noTelepon !== "undefined" ? errors.mahasiswa.noTelepon : ''}
+
                                         value={noTelepon}
                                         type="number"
                                         InputLabelProps={
@@ -96,6 +124,9 @@ const Stepper1 = (props) => {
                                     <TextField
                                         label="Alamat"
                                         name="alamat"
+                                    error={errors.mahasiswa && typeof errors.mahasiswa.alamat !== "undefined"}
+                                    helperText={errors.mahasiswa && typeof errors.mahasiswa.alamat !== "undefined" ? errors.mahasiswa.alamat : ''}
+
                                         multiline
                                         rows="4"
                                         value={alamat}

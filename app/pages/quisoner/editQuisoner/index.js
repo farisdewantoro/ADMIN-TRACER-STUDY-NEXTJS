@@ -20,6 +20,7 @@ import {
 import update from 'react-addons-update';
 import CloseIcon from '@material-ui/icons/Close';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
+import Link from 'next/link';
 class EditQuisoner extends Component {
   state={
       q_pertanyaan:[
@@ -192,8 +193,8 @@ class EditQuisoner extends Component {
                                             <CloseIcon />
                                           </IconButton>
                                           {!qj.additional && (
-                                            <IconButton>
-                                              <PlaylistAddIcon onClick={() => this.handlerAddAdditional(iQ, iJ)} />
+                                            <IconButton onClick={() => this.handlerAddAdditional(iQ, iJ)}>
+                                              <PlaylistAddIcon  />
                                             </IconButton>
                                           )}
                                          
@@ -261,9 +262,15 @@ class EditQuisoner extends Component {
                     </CardContent>
                 <AppBar position="static" color="default" elevation={0}>
                         <Toolbar>
-                            <Button variant="contained" color="primary">  
+                    <Button variant="contained" color="primary" style={{ margin: "0px 5px" }}>  
                                 SAVE
                             </Button>
+                          <Link href="/data-quisoner">
+                      <Button variant="flat" style={{ margin: "0px 5px" }} color="primary" >
+                        CANCEL
+                            </Button>
+                          </Link>
+                        
                         </Toolbar>
                     </AppBar>
                   </Card>

@@ -210,61 +210,99 @@ const components = {
     ValueContainer,
 };
 
-class IntegrationReactSelect extends React.Component {
-    state = {
-        single: null,
-        multi: null,
+const SelectSelect = (props)=>{
+    const { classes, theme,jurusans } = props;
+
+    const selectStyles = {
+        input: base => ({
+            ...base,
+            color: theme.palette.text.primary,
+            '& input': {
+                font: 'inherit',
+            },
+
+        }),
     };
+    return (
+        <div className={classes.root}>
+            <NoSsr>
+                <Select
+                    classes={classes}
+                    styles={selectStyles}
+                    options={jurusans}
+                    components={components}
+                    // value={this.state.single}
+                    // onChange={this.handleChange('single')}
+                    isClearable
+                    placeholder=""
+                    textFieldProps={{
+                        label: 'Jurusan',
+                        InputLabelProps: {
+                            shrink: true,
+                        },
+                    }}
+                />
 
-    handleChange = name => value => {
-        this.setState({
-            [name]: value,
-        });
-    };
+            </NoSsr>
+        </div>
+    );
+}   
 
-    render() {
-        const { classes, theme } = this.props;
+// class IntegrationReactSelect extends React.Component {
+//     state = {
+//         single: null,
+//         multi: null,
+//     };
 
-        const selectStyles = {
-            input: base => ({
-                ...base,
-                color: theme.palette.text.primary,
-                '& input': {
-                    font: 'inherit',
-                },
+//     handleChange = name => value => {
+//         this.setState({
+//             [name]: value,
+//         });
+//     };
 
-            }),
-        };
+//     render() {
+//         const { classes, theme } = this.props;
 
-        return (
-            <div className={classes.root}>
-                <NoSsr>
-                    <Select
-                        classes={classes}
-                        styles={selectStyles}
-                        options={suggestions}
-                        components={components}
-                        value={this.state.single}
-                        onChange={this.handleChange('single')}
-                        isClearable
-                        placeholder=""
-                        textFieldProps={{
-                            label: 'Jurusan',
-                            InputLabelProps: {
-                                shrink: true,
-                            },
-                        }}
-                    />
+//         const selectStyles = {
+//             input: base => ({
+//                 ...base,
+//                 color: theme.palette.text.primary,
+//                 '& input': {
+//                     font: 'inherit',
+//                 },
+
+//             }),
+//         };
+
+//         return (
+//             <div className={classes.root}>
+//                 <NoSsr>
+//                     <Select
+//                         classes={classes}
+//                         styles={selectStyles}
+//                         options={suggestions}
+//                         components={components}
+//                         value={this.state.single}
+//                         onChange={this.handleChange('single')}
+//                         isClearable
+//                         placeholder=""
+//                         textFieldProps={{
+//                             label: 'Jurusan',
+//                             InputLabelProps: {
+//                                 shrink: true,
+//                             },
+//                         }}
+//                     />
                
-                </NoSsr>
-            </div>
-        );
-    }
-}
+//                 </NoSsr>
+//             </div>
+//         );
+//     }
+// }
 
-IntegrationReactSelect.propTypes = {
+SelectSelect.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(IntegrationReactSelect);
+export default withStyles(styles, { withTheme: true })(SelectSelect);

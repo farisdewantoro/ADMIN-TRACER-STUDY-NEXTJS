@@ -1,5 +1,9 @@
 const Router = require('express').Router;
-const AuthController = require('../controllers/AuthController');
+const {
+    JurusanController,
+    MahasiswaController,
+    AuthController
+} = require('../controllers');
 class AppRouter{
     constructor(){
         this.router = Router();
@@ -7,6 +11,8 @@ class AppRouter{
     }
     buildRoutes(){
         this.router.post("/api/auth/login",AuthController.signin);
+        this.router.post('/api/mahasiswa/create',MahasiswaController.create);
+        this.router.get('/api/jurusan/get-all',JurusanController.getAll);
     }
 }
 

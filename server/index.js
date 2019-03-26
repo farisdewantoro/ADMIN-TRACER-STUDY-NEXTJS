@@ -88,6 +88,7 @@ nextApp.prepare().then(() => {
 
     app.listen(PORT, err => {
         if (err) throw err;
+
         console.log(`ready at http://localhost:${PORT}`)
     });
 })
