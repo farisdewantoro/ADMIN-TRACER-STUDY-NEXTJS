@@ -19,6 +19,7 @@ const getRoutes = require('./routes');
 // const routes = getRoutes();
 const handler = getRoutes.getRequestHandler(nextApp);
 const AppRouter = require('./routes/AppRouter');
+const passportSetup = require('./services/passport-setup');
 nextApp.prepare().then(() => {
     // express code here
     const app = express();

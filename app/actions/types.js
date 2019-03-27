@@ -1,17 +1,22 @@
 export const GET_ERRORS = 'GET_ERRORS';
 export const REMOVE_ERRORS = 'REMOVE_ERRORS';
-// AUTH
-export const AUTH_SET_USER = 'AUTH_SET_USER';
-export const LOADING_AUTH = 'LOADING_AUTH';
+
 
 // notification
 export const SET_NOTIFICATION = 'SET_NOTIFICATION';
 export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 
+// AUTH
+export const AUTH={
+    login:'AUTH:LOGIN',
+    loading:'AUTH:LOADING'
+}
+
 // Mahasiswa
 export const MAHASISWA = {
     loading:'MAHASISWA:LOADING',
-    getAll:'MAHASISWA:GETALL'
+    getAll:'MAHASISWA:GETALL',
+    edit:'MAHASISWA:EDIT'
 };
 
 // export const GET_ALL_JURUSAN = 'GET_ALL_JURUSAN';

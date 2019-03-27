@@ -14,10 +14,11 @@ import Layout2 from '../../../components/layout/layout_2';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import styles from './styles';
-import {createMahasiswa} from '.././../../actions/MahasiswaActions';
+import { updateMahasiswa, editMahasiswa} from '.././../../actions/MahasiswaActions';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import { getAllJurusan } from '../../../actions/JurusanActions';
+import moment from 'moment';
 function getSteps() {
     return ['DATA MAHASISWA', 'DATA LULUSAN'];
 }
@@ -25,6 +26,13 @@ function getSteps() {
 
 
 class EditDataAlumni extends React.Component {
+    static async getInitialProps({ req,query }) {
+   
+        const nrp = query.nrp;
+        const admin = req.user;
+        return { nrp,admin };
+    }
+
     state = {
         activeStep: 0,
         skipped: new Set(),
@@ -46,7 +54,8 @@ class EditDataAlumni extends React.Component {
     };
     componentDidMount(){
         this.props.getAllJurusan();
-        console.log(this.props);
+        this.props.editMahasiswa(this.props.nrp);
+    
     }
     handlerChangeMahasiswa = (e) => {
         let name = e.target.name;
@@ -71,6 +80,19 @@ class EditDataAlumni extends React.Component {
             const { activeStep } = this.state;
             this.setState({
                 activeStep: activeStep + 1
+            })
+        }
+        if (nextProps.mahasiswas.edit !== this.props.mahasiswas.edit && Object.keys(nextProps.mahasiswas.edit).length > 0  ){
+            const edit = nextProps.mahasiswas.edit;
+            if (edit.mahasiswa[0].jurusan && edit.mahasiswa[0].jurusan_id){
+                edit.mahasiswa[0].jurusan = { label: edit.mahasiswa[0].jurusan, value: edit.mahasiswa[0].jurusan_id}
+            }
+            if (edit.lulusan[0] && edit.lulusan[0].tanggalLulus){
+                edit.lulusan[0].tanggalLulus = moment(edit.lulusan[0].tanggalLulus).format('YYYY-MM-DD');
+            }
+            this.setState({
+                mahasiswa:edit.mahasiswa[0],
+                lulusan:edit.lulusan[0]
             })
         }
     }
@@ -144,7 +166,7 @@ class EditDataAlumni extends React.Component {
             lulusan
         }
 
-        this.props.createMahasiswa(data);
+        this.props.updateMahasiswa(data,this.props.nrp);
     }
 
     handleBack = () => {
@@ -186,6 +208,7 @@ class EditDataAlumni extends React.Component {
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
+        console.log(this.props);
         return (
             <Layout2 url={'/data-alumni'}>
                 <div className={classes.root}>
@@ -214,7 +237,7 @@ class EditDataAlumni extends React.Component {
                         {activeStep === steps.length ? (
                             <div>
                                 <Typography className={classes.instructions}>
-                                   Data mahasiswa telah berhasil dibuat.
+                                   Data mahasiswa telah berhasil diubah.
               </Typography>
                                 <Button onClick={this.handleReload} variant="contained" color="primary" className={classes.button}>
                                     Buat baru
@@ -253,22 +276,24 @@ class EditDataAlumni extends React.Component {
 
 EditDataAlumni.propTypes = {
     classes: PropTypes.object.isRequired,
-    createMahasiswa:PropTypes.func.isRequired,
+    updateMahasiswa:PropTypes.func.isRequired,
     getAllJurusan: PropTypes.func.isRequired,
     errors:PropTypes.object.isRequired,
     jurusans:PropTypes.object.isRequired,
     notifications: PropTypes.object.isRequired,
-
+    editMahasiswa:PropTypes.func.isRequired,
+    mahasiswas:PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) =>({
     errors:state.errors,
     jurusans:state.jurusans,
-    notifications:state.notifications
+    notifications:state.notifications,
+    mahasiswas:state.mahasiswas
 })
 
 export default compose(
     withStyles(styles),
-    connect(mapStateToProps, { createMahasiswa, getAllJurusan})
+    connect(mapStateToProps, { updateMahasiswa, getAllJurusan, editMahasiswa})
     )
 (EditDataAlumni);

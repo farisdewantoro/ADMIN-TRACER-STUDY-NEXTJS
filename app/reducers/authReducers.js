@@ -1,25 +1,24 @@
 import {
-    AUTH_SET_USER,
-    LOADING_AUTH
+    AUTH
 } from '../actions/types';
 import isEmpty from '../lib/is-empty';
 const initialState = {
     isAuthenticated: false,
-    mahasiswa: {},
+    admin: {},
     loading: false,
 };
 
 export default function (state = initialState, action) {
  
     switch (action.type) {
-        case AUTH_SET_USER:
+        case AUTH.login:
             return {
                 ...state,
-                mahasiswa:action.payload,
+                admin:action.payload,
                 isAuthenticated: !isEmpty(action.payload),
                 loading: false
             }
-        case LOADING_AUTH:
+        case AUTH.loading:
             return{
                 ...state,
                 loading:true

@@ -1,10 +1,10 @@
-import { AUTH_SET_USER, LOADING_AUTH, GET_ERRORS,REMOVE_ERRORS} from './types';
+import { AUTH, GET_ERRORS,REMOVE_ERRORS} from './types';
 import axios from 'axios';
 import {setNotification} from './notifActions';
 
 export const loadingAuth = ()=>{
     return{
-        type: LOADING_AUTH
+        type: AUTH.loading
     }
 }
 
@@ -16,9 +16,8 @@ export const submitLogin = (data) => disbatch =>{
             if(res.data.notification){
                 disbatch(setNotification(res.data.notification));
             }
-            console.log(res.data.data);
            disbatch({
-               type:AUTH_SET_USER,
+               type:AUTH.login,
                payload:res.data.data
            });
         })

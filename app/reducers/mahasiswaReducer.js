@@ -4,6 +4,7 @@ import {
 import isEmpty from '../lib/is-empty';
 const initialState = {
     mahasiswa:[],
+    edit:null,
     loading:false
 };
 
@@ -13,7 +14,14 @@ export default function (state = initialState, action) {
         case MAHASISWA.getAll:
             return {
                 ...state,
+                loading: true,
                 mahasiswa:action.payload
+            }
+        case MAHASISWA.edit:
+            return{
+                ...state,
+                loading: true,
+                edit: action.payload
             }
         case MAHASISWA.loading:
             return{

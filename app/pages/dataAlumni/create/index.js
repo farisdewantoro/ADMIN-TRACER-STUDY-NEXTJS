@@ -186,14 +186,10 @@ class CreateDataAlumni extends React.Component {
         const steps = getSteps();
         const { activeStep } = this.state;
         return (
-            <Layout2 url={'/data-alumni'}>
+            <Layout2 url={'/data-alumni'} >
                 <div className={classes.root}>
                     <Card>
-                        {/* <CardHeader
-                            title={<Typography variant="h6" style={{textAlign:"center"}}>
-                                FORM DATA ALUMNI
-                            </Typography>}
-                        /> */}
+               
                         <Stepper activeStep={activeStep} >
                             {steps.map((label, index) => {
                                 const props = {};

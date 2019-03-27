@@ -20,20 +20,44 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
-import { getAllMahasiswa} from '../../actions/MahasiswaActions';
+import { getAllMahasiswa, deleteMahasiswa} from '../../actions/MahasiswaActions';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
+import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
+import DialogDelete from '../../components/common/DialogDelete';
 class DataAlumni extends Component {
+  state={
+     dialogDelete:false,
+     mahasiswa_id:0
+  }
   componentDidMount(){
     this.props.getAllMahasiswa();
+  }
+  componentWillReceiveProps(nextProps){
+    if (nextProps.notifications !== this.state.notifications ){
+      this.setState({
+        mahasiswa_id:0,
+        dialogDelete:false
+      })
+    }
+  }
+  openDialogDelete=(id)=>{
+    this.setState({ dialogDelete: true, mahasiswa_id:id });
+  }
+  closeDialogDelete=()=>{
+    this.setState({ dialogDelete: false,mahasiswa_id:0 });
+  }
+
+  dialogDeleteSubmit = ()=>{
+    this.props.deleteMahasiswa(this.state.mahasiswa_id);
   }
 
   render() {
     const {classes,mahasiswas} = this.props;
     return (
-      <Layout2 url={'/data-alumni'}>
+      <Layout2 url={'/data-alumni'} >
         <div>
           <Grid container direction="column" spacing={16}>
           <Grid item xs={12}>
@@ -46,9 +70,6 @@ class DataAlumni extends Component {
           </Grid>
           <Grid item xs={12}>
               <Paper className={classes.root} elevation={1}>
-                {/* <IconButton className={classes.iconButton} aria-label="Menu">
-                  <MenuIcon />
-                </IconButton> */}
                 <IconButton className={classes.iconButton} aria-label="Search">
                   <SearchIcon />
                 </IconButton>
@@ -71,7 +92,7 @@ class DataAlumni extends Component {
                     />
                     <div className={classes.details}>
                       <CardContent className={classes.content}>
-                        <Grid container alignItems="center" direction="row" spacing={12}>
+                        <Grid container alignItems="center" direction="row" spacing={16}>
                           <Grid item md={12}>
                             <Typography variant="h6" color="primary">
                             {m.nama}
@@ -110,6 +131,10 @@ class DataAlumni extends Component {
                                   <CreateIcon />
                                 </IconButton>
                                 </a>
+                                <IconButton onClick={()=>this.openDialogDelete(m.id)}>
+                                    <DeleteIcon/>
+                                  </IconButton>
+                           
                               </div>
 
 
@@ -127,6 +152,12 @@ class DataAlumni extends Component {
             })}
             
           </Grid>
+          <DialogDelete
+            openDialogDelete={this.openDialogDelete}
+            closeDialogDelete={this.closeDialogDelete}
+            dialogDelete={this.state.dialogDelete}
+            dialogDeleteSubmit={this.dialogDeleteSubmit}
+          />
         </div>
       </Layout2>
     
@@ -138,12 +169,14 @@ class DataAlumni extends Component {
 DataAlumni.propTypes={
   getAllMahasiswa:PropTypes.func.isRequired,
   mahasiswas:PropTypes.object.isRequired,
-  classes:PropTypes.object.isRequired
+  classes:PropTypes.object.isRequired,
+  deleteMahasiswa:PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state)=>({
-  mahasiswas:state.mahasiswas
+  mahasiswas:state.mahasiswas,
+  notifications:state.notifications
 });
 
 
-export default compose(connect(mapStateToProps, { getAllMahasiswa}),withStyles(styles))(DataAlumni);
+export default compose(connect(mapStateToProps, { getAllMahasiswa, deleteMahasiswa}),withStyles(styles))(DataAlumni);

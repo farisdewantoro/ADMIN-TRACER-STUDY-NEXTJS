@@ -2,7 +2,8 @@ const Router = require('express').Router;
 const {
     JurusanController,
     MahasiswaController,
-    AuthController
+    AuthController,
+    AdminController
 } = require('../controllers');
 class AppRouter{
     constructor(){
@@ -15,6 +16,12 @@ class AppRouter{
 
         this.router.post('/api/mahasiswa/create', MahasiswaController.create);
         this.router.get('/api/mahasiswa/get-all', MahasiswaController.getAll);
+        this.router.delete('/api/mahasiswa/delete', MahasiswaController.delete);
+        this.router.get('/api/mahasiswa/get/:nrp', MahasiswaController.edit);
+        this.router.put('/api/mahasiswa/update/:nrp', MahasiswaController.update);
+
+        this.router.post('/api/admin/create-master',AdminController.createMaster);
+    
     }
 }
 

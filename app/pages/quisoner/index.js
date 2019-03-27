@@ -19,9 +19,9 @@ class Quisoner extends Component {
                 <div>
                     <Grid container direction="column" spacing={16}>
                         <Grid item xs={12}>
-                            <Link href="/data-quisoner/edit">
+                            <Link href="/data-quisoner/create">
                                 <Button variant="contained" color="primary">
-                                    EDIT QUISONER
+                                    TAMBAH QUISONER
                                   </Button>
                             </Link>
 
