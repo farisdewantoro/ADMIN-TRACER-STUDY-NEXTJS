@@ -67,10 +67,7 @@ nextApp.prepare().then(() => {
     // ]);
 
     app.use(AppRouter);
-    // app.get('/login', (req, res) => {
-    //     const params = parse(req.url).pathname;
-    //     return app.render(req, res, '/login', params);
-    // });
+
     app.use(handler);
     // app.get('*', (req, res) => {
     //     const parsedUrl = parse(req.url,true);

@@ -29,8 +29,8 @@ class EditDataAlumni extends React.Component {
     static async getInitialProps({ req,query }) {
    
         const nrp = query.nrp;
-        const admin = req.user;
-        return { nrp,admin };
+        const auth_admin = req.user;
+        return { nrp,auth_admin };
     }
 
     state = {
@@ -208,7 +208,7 @@ class EditDataAlumni extends React.Component {
         const { classes } = this.props;
         const steps = getSteps();
         const { activeStep } = this.state;
-        console.log(this.props);
+
         return (
             <Layout2 url={'/data-alumni'}>
                 <div className={classes.root}>

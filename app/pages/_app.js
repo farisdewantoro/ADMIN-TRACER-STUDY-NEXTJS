@@ -9,6 +9,14 @@ import getPageContext from '../lib/getPageContext';
 import  '../index.css';
 
 class MyApp extends App {
+  static async getInitialProps({ Component, router, ctx}){
+    let pageProps = {}
+    if (Component.getInitialProps) {
+      pageProps = await Component.getInitialProps(ctx)
+    }
+    return { pageProps }
+  }
+
   constructor() {
     super();
     this.pageContext = getPageContext();
@@ -36,7 +44,9 @@ class MyApp extends App {
               sheetsManager={this.pageContext.sheetsManager}
             >
               <CssBaseline />
-              <Component pageContext={this.pageContext} {...pageProps} />
+              <Component 
+              pageContext={this.pageContext} 
+              {...pageProps} />
             </MuiThemeProvider>
           </JssProvider>
         </Provider>
