@@ -2,3 +2,7 @@
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 @import url('https://fonts.googleapis.com/css?family=Baloo+Chettan|Oswald');
 @import url('https://fonts.googleapis.com/css?family=Baloo+Chettan|Oswald|Roboto+Slab');
+
+a{
+    text-decoration:none
+}

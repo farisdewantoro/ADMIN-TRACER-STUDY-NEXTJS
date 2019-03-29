@@ -12,6 +12,7 @@ class AppRouter{
     }
     buildRoutes(){
         this.router.post("/api/auth/login",AuthController.signin);
+        this.router.post("/api/auth/logout", AuthController.logout);
         this.router.get('/api/jurusan/get-all',JurusanController.getAll);
 
         this.router.post('/api/mahasiswa/create', MahasiswaController.create);
@@ -21,7 +22,7 @@ class AppRouter{
         this.router.put('/api/mahasiswa/update/:nrp', MahasiswaController.update);
 
         this.router.post('/api/admin/create-master',AdminController.createMaster);
-    
+        this.router.post('/api/admin/create-admin', AdminController.createAdmin);
     }
 }
 

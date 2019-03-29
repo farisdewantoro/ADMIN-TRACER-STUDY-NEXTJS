@@ -9,7 +9,14 @@ export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 // AUTH
 export const AUTH={
     login:'AUTH:LOGIN',
-    loading:'AUTH:LOADING'
+    loading:'AUTH:LOADING',
+    logout:'AUTH:LOGOUT'
+}
+
+// ADMIN
+export const ADMIN={
+    create:'ADMIN:CREATE',
+    loading:'ADMIN:LOADING'
 }
 
 // Mahasiswa

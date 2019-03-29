@@ -21,9 +21,11 @@ import PhonelinkSetupIcon from '@material-ui/icons/PhonelinkSetup';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import AccessibilityIcon from '@material-ui/icons/Accessibility';
 import Link from 'next/link';
-
-
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import {logout} from '../../../actions/authActions';
 const styles = theme => ({
     categoryHeader: {
         paddingTop: 16,
@@ -70,20 +72,29 @@ const styles = theme => ({
 });
 
 function Navigator(props) {
-    
+  
     const { classes, url, ...other } = props;
+    let listMenu = [];
+    if (props.auths.admin && typeof props.auths.admin.hak_akses !== "undefined" && props.auths.admin.hak_akses == "master"){
+        listMenu =[
+            { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
+            { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
+            { id: 'Data Quisoner', icon: <EventNoteIcon />, link: '/data-quisoner' },
+            { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' },
+            { id: 'Data Admin Jurusan', icon:<AccessibilityIcon/>,link:'/data-admin-jurusan'},
+     
+        ];
+    }
+    if (props.auths.admin && typeof props.auths.admin.hak_akses !== "undefined" && props.auths.admin.hak_akses == "admin") {
+        listMenu = [
+            { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
+            { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
+            { id: 'Data Quisoner', icon: <EventNoteIcon />, link: '/data-quisoner' },
+            { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' }
+        ];
+    }
 
-    const listMenu = [
-        { id: 'Identitas', icon: <PeopleIcon />, link:'/identitas',},
-        { id: 'Data Alumni', icon: <DnsRoundedIcon />,link:'/data-alumni' },
-        {id:'Data Quisoner', icon:<EventNoteIcon/>,link:'/data-quisoner'},
-        { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' }
-        // { id: 'Storage', icon: <PermMediaOutlinedIcon /> },
-        // { id: 'Hosting', icon: <PublicIcon /> },
-        // { id: 'Functions', icon: <SettingsEthernetIcon /> },
-        // { id: 'ML Kit', icon: <SettingsInputComponentIcon /> },
-        // { id: 'Logout', icon: <ExitToAppIcon /> }
-    ];
+    
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
@@ -103,7 +114,7 @@ function Navigator(props) {
                             </ListItemText>
                         </ListItem>
                         {listMenu.map(({ id: childId, icon,link }) => (
-                            <Link href={link} key={childId}>
+                            <a href={link} key={childId} >
                                 <ListItem
                                     button
                                     dense
@@ -125,9 +136,29 @@ function Navigator(props) {
                                         {childId}
                                     </ListItemText>
                                 </ListItem>
-                            </Link>
+                            </a>
                     
                         ))}
+                    <ListItem
+                        button
+                        dense
+                        onClick={() =>props.logout()}
+                        className={classNames(
+                            classes.item,
+                            classes.itemActionable,
+                        )}
+
+                    >
+                        <ListItemIcon><ExitToAppIcon/></ListItemIcon>
+                        <ListItemText
+                            classes={{
+                                primary: classes.itemPrimary,
+                                textDense: classes.textDense,
+                            }}
+                        >
+                            Logout
+                        </ListItemText>
+                    </ListItem>
                         <Divider className={classes.divider} />
                     </React.Fragment>
              
@@ -138,6 +169,7 @@ function Navigator(props) {
 
 Navigator.propTypes = {
     classes: PropTypes.object.isRequired,
+    logout:PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(Navigator);
+export default compose(withStyles(styles), connect(null, { logout}))(Navigator);

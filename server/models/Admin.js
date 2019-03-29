@@ -14,6 +14,8 @@ class Admin{
         left join jurusan as j on aj.jurusan_id = j.id
         where a.username = ?
         `;
+        this.createAdmin = `INSERT INTO ADMIN set ? `;
+        this.createAdminJurusan = `INSERT INTO admin_jurusan set ? `;
     }
 }
 

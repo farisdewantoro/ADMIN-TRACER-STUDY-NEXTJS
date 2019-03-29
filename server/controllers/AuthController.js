@@ -56,6 +56,13 @@ class AuthController{
         
        
     }
+    logout(req,res){
+        req.logout();
+        req.session.destroy(function (err) {
+            // cannot access session here
+        });
+        return res.status(200).json('LOGOUT');
+    }
 }
 
 module.exports = new AuthController();

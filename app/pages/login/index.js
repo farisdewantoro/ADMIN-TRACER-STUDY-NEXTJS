@@ -21,6 +21,16 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 
 class Login extends Component {
+  static async getInitialProps(something) {
+    const { res, req } = something;
+    if (req && req.user) {
+      res.writeHead(302, {
+        Location: '/data-alumni'
+      })
+      res.end()
+    }
+
+  }
   state = {
     username: '',
     password: ''

@@ -164,7 +164,7 @@ class Paperbase extends React.Component {
 
 
     render() {
-        const { classes,url,notifications } = this.props;
+        const { classes, url, notifications, auths } = this.props;
     
         return (
             <div>
@@ -185,7 +185,7 @@ class Paperbase extends React.Component {
                             />
                         </Hidden>
                         <Hidden xsDown implementation="css">
-                            <Navigator PaperProps={{ style: { width: drawerWidth } }}  url={url} />
+                                <Navigator PaperProps={{ style: { width: drawerWidth } }} auths={auths}  url={url} />
                         </Hidden>
                     </nav>
                     <div className={classes.appContent}>
@@ -204,10 +204,13 @@ class Paperbase extends React.Component {
 
 Paperbase.propTypes = {
     classes: PropTypes.object.isRequired,
+    notifications:PropTypes.object.isRequired,
+    auths:PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state)=>({
-    notifications:state.notifications
+    notifications:state.notifications,
+    auths:state.auths
 })
 
 export default compose(connect(mapStateToProps),withStyles(styles))(Paperbase);

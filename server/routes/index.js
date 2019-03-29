@@ -12,7 +12,8 @@ module.exports = routes()
     .add('editQuisoner', '/data-quisoner/create', 'quisoner/create')
     .add('dataJurusan','/data-jurusan','dataJurusan')
     .add('CreateDataJurusan', '/data-jurusan/create', 'dataJurusan/create')
- 
+    .add('dataAdminJurusan', '/data-admin-jurusan', 'dataAdminJurusan')
+    .add('dataAdminJurusanCreate', '/data-admin-jurusan/create', 'dataAdminJurusan/create')
     ;
 
 // module.exports=()=>{

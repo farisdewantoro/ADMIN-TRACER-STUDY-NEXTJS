@@ -27,7 +27,18 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import moment from 'moment';
 import DialogDelete from '../../components/common/DialogDelete';
+
 class DataAlumni extends Component {
+  static async getInitialProps(something) {
+    const { res,req} = something;
+    if(!req.user){
+      res.writeHead(302, {
+        Location: '/login'
+      })
+      res.end()
+    }
+
+  }
   state={
      dialogDelete:false,
      mahasiswa_id:0

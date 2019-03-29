@@ -26,12 +26,7 @@ function getSteps() {
 
 
 class EditDataAlumni extends React.Component {
-    static async getInitialProps({ req,query }) {
-   
-        const nrp = query.nrp;
-        const auth_admin = req.user;
-        return { nrp,auth_admin };
-    }
+
 
     state = {
         activeStep: 0,

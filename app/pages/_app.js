@@ -7,19 +7,23 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import JssProvider from 'react-jss/lib/JssProvider';
 import getPageContext from '../lib/getPageContext';
 import  '../index.css';
-
 class MyApp extends App {
-  static async getInitialProps({ Component, router, ctx}){
+  static async getInitialProps(something){
+    const { Component, router, ctx } = something;
+
     let pageProps = {}
     if (Component.getInitialProps) {
       pageProps = await Component.getInitialProps(ctx)
     }
+
     return { pageProps }
   }
 
   constructor() {
     super();
+
     this.pageContext = getPageContext();
+   
   }
   componentDidMount() {
     // Remove the server-side injected CSS.
@@ -31,7 +35,7 @@ class MyApp extends App {
 
   render() {
     const { Component, pageProps, reduxStore } = this.props
-
+  
     return (
       <Container>
         <Provider store={reduxStore}>
