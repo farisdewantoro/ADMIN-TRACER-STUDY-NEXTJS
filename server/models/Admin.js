@@ -8,7 +8,8 @@ class Admin{
         a.hak_akses,
         a.id,
         j.nama as jurusan,
-        j.prodi
+        j.prodi,
+        j.id as jurusan_id
         from admin as a
         left join admin_jurusan as aj on a.id = aj.admin_id
         left join jurusan as j on aj.jurusan_id = j.id

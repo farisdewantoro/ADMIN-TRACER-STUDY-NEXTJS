@@ -10,7 +10,8 @@ export const CLEAR_NOTIFICATION = 'CLEAR_NOTIFICATION';
 export const AUTH={
     login:'AUTH:LOGIN',
     loading:'AUTH:LOADING',
-    logout:'AUTH:LOGOUT'
+    logout:'AUTH:LOGOUT',
+    removeLoading:'AUTH:REMOVE_LOADING'
 }
 
 // ADMIN

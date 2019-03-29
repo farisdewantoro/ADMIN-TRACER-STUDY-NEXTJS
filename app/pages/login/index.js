@@ -14,7 +14,9 @@ import {
   Input,
   InputBase,
   InputLabel,
-  FormControl
+  FormControl,
+  LinearProgress,
+  FormHelperText
 } from '@material-ui/core';
 import { submitLogin } from '../../actions/authActions';
 import { connect } from 'react-redux';
@@ -53,13 +55,18 @@ class Login extends Component {
 
   render() {
 
-    const { classes } = this.props;
+    const { classes, errors,auths } = this.props;
     const { username, password } = this.state;
     return (
       <div style={{ background:"#f58220",minHeight:"100vh"}}>
           <Grid container justify="center" >
             <Grid item md={4}>
+       
             <Card style={{marginTop:"20px"}}>
+              {auths.loading && (
+                <LinearProgress color="secondary" />
+              )}
+            
               <form onSubmit={this.onSubmitLogin}>
                 <CardHeader
                   title={<div>
@@ -127,6 +134,11 @@ class Login extends Component {
                       </FormControl>
 
                     </Grid>
+                  
+                      <FormHelperText error variant='filled'>
+                        {errors.error}
+                      </FormHelperText>
+                
                   </Grid>
                 </CardContent>
                 <CardActions>
@@ -153,11 +165,13 @@ class Login extends Component {
 
 Login.propTypes = {
   classes: PropTypes.object.isRequired,
-  submitLogin: PropTypes.func.isRequired
+  submitLogin: PropTypes.func.isRequired,
+  errors:PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => ({
-  auths: state.auths
-})
+  auths: state.auths,
+  errors:state.errors
+});
 
 export default compose(withStyles(styles), connect(mapStateToProps, { submitLogin }))(Login);

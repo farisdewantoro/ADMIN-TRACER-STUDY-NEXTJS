@@ -8,10 +8,17 @@ export const loadingAuth = ()=>{
     }
 }
 
+export const removeLoading = ()=>{
+    return{
+        type:AUTH.removeLoading
+    }
+}
+
 export const logout = ()=>disbatch=>{
     disbatch(loadingAuth());
     axios.post('/api/auth/logout')
         .then(res => {
+            disbatch(removeLoading());
             if (res.data.notification) {
                 disbatch(setNotification(res.data.notification));
             }
@@ -23,6 +30,7 @@ export const logout = ()=>disbatch=>{
                 message: "There is an error !",
                 notification: true
             }
+            disbatch(removeLoading());
             disbatch(setNotification(notification));
         });
 }
@@ -48,6 +56,7 @@ export const submitLogin = (data) => disbatch =>{
                     payload:err.response.data
                 })
             }
+            disbatch(removeLoading());
             let notification = {
                 error: true,
                 message: "There is an error !",

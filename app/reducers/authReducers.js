@@ -18,10 +18,19 @@ export default function (state = initialState, action) {
                 isAuthenticated: !isEmpty(action.payload),
                 loading: false
             }
+        case AUTH.logout:
+            return{
+                
+            }
         case AUTH.loading:
             return{
                 ...state,
                 loading:true
+            }
+        case AUTH.removeLoading:
+            return {
+                ...state,
+                loading: false
             }
 
         default:

@@ -99,6 +99,9 @@ class MahasiswaController{
 
     getAll(req,res){
         let querySelectAll = new MahasiswaModel().SelectWithJurusan;
+        if(req.user && req.user.jurusan_id && req.user.hak_akses === 'admin'){
+            querySelectAll = new MahasiswaModel().getAllByJurusan(req.user.jurusan_id);
+        }
         db.query(querySelectAll,(err,result)=>{
             if (err) return res.status(400).json(err);
             if (result) {

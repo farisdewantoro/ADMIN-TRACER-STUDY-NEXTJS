@@ -39,9 +39,7 @@ class AuthController{
         passport.authenticate('local', function (err, user, info) {
 
             if (err) { return next(err); }
-            if (!user) { return res.status(400).json({ errors:{
-                message: info.message 
-            }}) }
+            if (!user) { return res.status(400).json({ error: info.message}) }
             req.login(user, function (err) {
                 if (err) { return next(err); }
                 if (user) {

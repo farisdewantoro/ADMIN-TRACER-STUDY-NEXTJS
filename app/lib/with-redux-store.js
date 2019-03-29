@@ -22,7 +22,7 @@ export default App => {
     return class AppWithRedux extends React.Component {
         static async getInitialProps(appContext) {
             const reduxStore = getOrCreateStore()
-            console.log(appContext.ctx.req)
+      
             if (appContext.ctx.req){
                 let admin_auth = appContext.ctx.req.user ? appContext.ctx.req.user : {};
 

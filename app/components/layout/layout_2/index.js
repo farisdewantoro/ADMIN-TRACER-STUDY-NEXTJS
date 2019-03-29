@@ -181,7 +181,7 @@ class Paperbase extends React.Component {
                                 variant="temporary"
                                 open={this.state.mobileOpen}
                                 onClose={this.handleDrawerToggle}
-                                
+                                    auths={auths} 
                             />
                         </Hidden>
                         <Hidden xsDown implementation="css">

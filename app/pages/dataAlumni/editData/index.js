@@ -26,7 +26,22 @@ function getSteps() {
 
 
 class EditDataAlumni extends React.Component {
+    static async getInitialProps(something) {
+        
+        const { res, req,query } = something;
+        if (!req.user) {
+            res.writeHead(302, {
+                Location: '/login'
+            })
+            res.end()
+        }
+        let nrp = query.nrp;
+   
 
+        return{
+            nrp
+        }
+    }
 
     state = {
         activeStep: 0,
@@ -277,14 +292,16 @@ EditDataAlumni.propTypes = {
     jurusans:PropTypes.object.isRequired,
     notifications: PropTypes.object.isRequired,
     editMahasiswa:PropTypes.func.isRequired,
-    mahasiswas:PropTypes.object.isRequired
+    mahasiswas:PropTypes.object.isRequired,
+    auths:PropTypes.object.isRequired
 };
 
 const mapStateToProps = (state) =>({
     errors:state.errors,
     jurusans:state.jurusans,
     notifications:state.notifications,
-    mahasiswas:state.mahasiswas
+    mahasiswas:state.mahasiswas,
+    auths:state.auths
 })
 
 export default compose(

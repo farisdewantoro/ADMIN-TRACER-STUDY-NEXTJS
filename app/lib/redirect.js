@@ -18,7 +18,6 @@ const redirect = destination =>
         }
 
         render() {
-            console.log('asd');
             if (this.props.metaRedirect) {
                 return (
                     <Head>
