@@ -17,7 +17,8 @@ export const AUTH={
 // ADMIN
 export const ADMIN={
     create:'ADMIN:CREATE',
-    loading:'ADMIN:LOADING'
+    loading:'ADMIN:LOADING',
+    getAll:'ADMIN:GETALL'
 }
 
 // Mahasiswa
@@ -33,3 +34,8 @@ export const JURUSAN={
     getAll:'JURUSAN:GETALL',
     loading:'JURUSAN:LOADING'
 };
+
+export const FAKULTAS={
+    getAll:'FAKULTAS:GETALL',
+    loading:'FAKULTAS:LOADING'
+}

@@ -172,7 +172,7 @@ const components = {
 };
 
 const SelectSelect = (props)=>{
-    const { classes, theme, jurusans, handlerChangeJurusan,jurusan } = props;
+    const { classes, theme, options, handleChange,value,label } = props;
 
     const selectStyles = {
         input: base => ({
@@ -190,14 +190,14 @@ const SelectSelect = (props)=>{
                 <Select
                     classes={classes}
                     styles={selectStyles}
-                    options={jurusans}
+                    options={options}
                     components={components}
-                    value={jurusan}
-                    onChange={handlerChangeJurusan}
+                    value={value}
+                    onChange={handleChange}
                     isClearable
                     placeholder=""
                     textFieldProps={{
-                        label: 'Jurusan',
+                        label: label,
                         InputLabelProps: {
                             shrink: true,
                         },

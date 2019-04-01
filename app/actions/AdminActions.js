@@ -8,6 +8,25 @@ export const loadingAdmin = () => {
     }
 }
 
+export const getAllAdmin = ()=>disbatch=>{
+    disbatch(loadingAdmin());
+    axios.get('/api/admin/get-all')
+        .then(res=>{
+            disbatch({
+                type:ADMIN.getAll,
+                payload:res.data
+            })
+        })
+        .catch(err=>{
+            let notification = {
+                error: true,
+                message: "There is an error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        })
+}
+
 export const createAdmin = (data) => disbatch => {
     disbatch(loadingAdmin());
     axios.post('/api/admin/create-admin', data)

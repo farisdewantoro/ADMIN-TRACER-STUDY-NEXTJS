@@ -14,6 +14,8 @@ module.exports = routes()
     .add('CreateDataJurusan', '/data-jurusan/create', 'dataJurusan/create')
     .add('dataAdminJurusan', '/data-admin-jurusan', 'dataAdminJurusan')
     .add('dataAdminJurusanCreate', '/data-admin-jurusan/create', 'dataAdminJurusan/create')
+    .add('dataPekerjaan','/data-pekerjaan','dataPekerjaan')
+    .add('dataPekerjaanCreate', '/data-pekerjaan/create', 'dataPekerjaan/create')
     ;
 
 // module.exports=()=>{

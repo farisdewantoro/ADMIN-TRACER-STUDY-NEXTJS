@@ -1,22 +1,21 @@
-import {JURUSAN} from './types';
+import { FAKULTAS } from './types';
 import axios from 'axios';
 import { setNotification } from './notifActions';
 
-export const loadingJurusan = () =>{
-    return{
-        type:JURUSAN.loading
+export const loadingFakultas = () => {
+    return {
+        type: FAKULTAS.loading
     }
 }
 
 
-
-export const getAllJurusan = (data)=>disbatch=>{
-    disbatch(loadingJurusan());
-    axios.get('/api/jurusan/get-all')
-        .then(res=>{
+export const getAllFakultas= () => disbatch => {
+    disbatch(loadingFakultas());
+    axios.get('/api/fakultas/get-all')
+        .then(res => {
             disbatch({
-                type:JURUSAN.getAll,
-                payload:res.data
+                type: FAKULTAS.getAll,
+                payload: res.data
             })
         })
         .catch(err => {

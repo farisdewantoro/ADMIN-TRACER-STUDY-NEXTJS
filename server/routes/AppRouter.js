@@ -3,7 +3,8 @@ const {
     JurusanController,
     MahasiswaController,
     AuthController,
-    AdminController
+    AdminController,
+    FakultasController
 } = require('../controllers');
 class AppRouter{
     constructor(){
@@ -13,7 +14,11 @@ class AppRouter{
     buildRoutes(){
         this.router.post("/api/auth/login",AuthController.signin);
         this.router.post("/api/auth/logout", AuthController.logout);
+
+
         this.router.get('/api/jurusan/get-all',JurusanController.getAll);
+        this.router.get('/api/fakultas/get-all', FakultasController.getAll);
+
 
         this.router.post('/api/mahasiswa/create', MahasiswaController.create);
         this.router.get('/api/mahasiswa/get-all', MahasiswaController.getAll);
@@ -23,6 +28,7 @@ class AppRouter{
 
         this.router.post('/api/admin/create-master',AdminController.createMaster);
         this.router.post('/api/admin/create-admin', AdminController.createAdmin);
+        this.router.get('/api/admin/get-all', AdminController.getAll);
     }
 }
 

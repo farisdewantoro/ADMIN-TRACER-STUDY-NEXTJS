@@ -5,12 +5,13 @@ import notifReducer from './notifReducer';
 import mahasiswaReducer from './mahasiswaReducer';
 import jurusanReducer from './jurusanReducer';
 import adminReducer from './adminReducer';
-
+import fakultasReducer from './fakultasReducer';
 export default combineReducers({
     auths: authReducers,
     errors: errorReducer,
     notifications: notifReducer,
     mahasiswas: mahasiswaReducer,
     jurusans: jurusanReducer,
-    admins: adminReducer
+    admins: adminReducer,
+    fakultass: fakultasReducer
 });

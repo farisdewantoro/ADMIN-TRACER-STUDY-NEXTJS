@@ -22,6 +22,8 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AccessibilityIcon from '@material-ui/icons/Accessibility';
+import WorkIcon from '@material-ui/icons/Work';
+import StarRateIcon from '@material-ui/icons/StarRate';
 import Link from 'next/link';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
@@ -79,6 +81,8 @@ function Navigator(props) {
         listMenu =[
             { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
             { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
+            { id: 'Data Pekerjaan', icon: <WorkIcon />, link: '/data-pekerjaan' },
+            { id: 'Data Prestasi', icon: <StarRateIcon />, link: '/data-prestasi' },
             { id: 'Data Quisoner', icon: <EventNoteIcon />, link: '/data-quisoner' },
             { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' },
             { id: 'Data Admin Jurusan', icon:<AccessibilityIcon/>,link:'/data-admin-jurusan'},
@@ -89,8 +93,11 @@ function Navigator(props) {
         listMenu = [
             { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
             { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
+            { id: 'Data Pekerjaan', icon: <WorkIcon />, link: '/data-pekerjaan' },
+            { id: 'Data Prestasi', icon: <StarRateIcon />, link: '/data-prestasi' },
             { id: 'Data Quisoner', icon: <EventNoteIcon />, link: '/data-quisoner' },
-            { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' }
+            { id: 'Data Jurusan', icon: <AssignmentIcon />, link: '/data-jurusan' },
+       
         ];
     }
 

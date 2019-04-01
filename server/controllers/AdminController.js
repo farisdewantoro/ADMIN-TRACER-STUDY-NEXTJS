@@ -86,6 +86,38 @@ class AdminController{
             })
         })
     }
+
+    getAll(req,res){
+        let query = new AdminModel().querySelectAll; 
+        db.query(query,(err,result)=>{
+            if(err){
+
+                return res.status(400).json(err);
+            }
+            if(result.length > 0){
+               let data =[];
+                result.forEach(e => {
+                    let jurusan=e.jurusan;
+                    if(data.filter(d=>d.jurusan === jurusan).length === 0){
+                        data.push({ jurusan: e.jurusan, admin: [] });
+                 
+                    }
+                           data.forEach(j => {
+                            if (jurusan === j.jurusan) {
+                                j.admin.push(e);
+                            }
+                        })
+                  
+                });
+         
+
+                return res.status(200).json(data);
+
+            }
+        })
+    
+  
+    }
  
 }
 
