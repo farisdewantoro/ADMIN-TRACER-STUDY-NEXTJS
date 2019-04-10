@@ -42,7 +42,6 @@ class DataAdminJurusan extends Component {
 
     render() {
         const { classes, admins} = this.props;
-        console.log(admins);
         return (
             <Layout2 url={'/data-admin-jurusan'}>
                 <div>
