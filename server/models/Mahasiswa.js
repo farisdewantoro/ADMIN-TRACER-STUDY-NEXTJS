@@ -6,7 +6,7 @@ class Mahasiswa{
         this.UpdateMahasiswa = `UPDATE mahasiswa set ? where nrp = ?`;
         this.UpdateLulusan = `UPDATE lulusan set ? where mahasiswa_id = ?`;
 
-        this.SelectWithJurusan = `SELECT 
+        this.SelectWithJurusan = `SELECT
         m.id,
         m.nrp,
         m.nama,
@@ -21,7 +21,7 @@ class Mahasiswa{
         l.tanggalLulus,
         j.nama as jurusan,
         j.prodi
-        from mahasiswa as m 
+        from mahasiswa as m
         left join lulusan as l on m.id = l.mahasiswa_id
         left join jurusan as j on m.jurusan_id = j.id
         group by
@@ -41,7 +41,7 @@ class Mahasiswa{
         j.prodi
         order by m.created_at desc`;
         this.deleteMahasiswa = `DELETE FROM mahasiswa where id = ? `;
-        this.selectMahasiswa = `SELECT 
+        this.selectMahasiswa = `SELECT
         m.id,
         m.nrp,
         m.nama,
@@ -62,10 +62,76 @@ class Mahasiswa{
         left join mahasiswa as m on l.mahasiswa_id = m.id
         where m.nrp = ?
         `;
+        this.addPekerjaan = `INSERT INTO pekerjaan set ?`;
+        this.addPrestasi = `INSERT INTO prestasi set ?`;
+        this.getAllPekerjaan = `SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPerusahaan,
+        p.tanggalMasuk,
+        p.tempat,
+        p.jabatan,
+        j.nama as jurusan,
+        j.prodi
+        from pekerjaan as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        order by m.created_at desc`;
+        this.getAllPrestasi =`
+        SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPrestasi,
+        p.jenisPrestasi,
+        p.tahun,
+        j.nama as jurusan,
+        j.prodi
+        from prestasi as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        order by m.created_at desc
+        `
     };
 
+    getAllJurusanPekerjaan(id){
+        return `SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPerusahaan,
+        p.tanggalMasuk,
+        p.tempat,
+        p.jabatan,
+        j.nama as jurusan,
+        j.prodi
+        from pekerjaan as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        where j.id = ${id}
+        order by m.created_at desc`;
+    }
+
+    getAllJurusanPrestasi(id){
+        return `SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPrestasi,
+        p.jenisPrestasi,
+        p.tahun,
+        j.nama as jurusan,
+        j.prodi
+        from prestasi as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        where j.id = ${id}
+        order by m.created_at desc`;
+    }
+
     getAllByJurusan(id){
-        return `SELECT 
+        return `SELECT
         m.id,
         m.nrp,
         m.nama,
@@ -80,7 +146,7 @@ class Mahasiswa{
         l.tanggalLulus,
         j.nama as jurusan,
         j.prodi
-        from mahasiswa as m 
+        from mahasiswa as m
         left join lulusan as l on m.id = l.mahasiswa_id
         left join jurusan as j on m.jurusan_id = j.id
         where j.id = ${id}
@@ -101,11 +167,7 @@ class Mahasiswa{
         j.prodi
         order by m.created_at desc`;
     }
-  
+
 }
 
 module.exports = Mahasiswa;
-
-
-
-

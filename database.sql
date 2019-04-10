@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               10.1.36-MariaDB - mariadb.org binary distribution
--- Server OS:                    Win32
--- HeidiSQL Version:             9.5.0.5196
+-- Versi server:                 10.1.35-MariaDB - mariadb.org binary distribution
+-- OS Server:                    Win32
+-- HeidiSQL Versi:               9.5.0.5196
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -12,11 +12,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
--- Dumping database structure for tracerstudy
+-- Membuang struktur basisdata untuk tracerstudy
 CREATE DATABASE IF NOT EXISTS `tracerstudy` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `tracerstudy`;
 
--- Dumping structure for table tracerstudy.admin
+-- membuang struktur untuk table tracerstudy.admin
 CREATE TABLE IF NOT EXISTS `admin` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL DEFAULT '0',
@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `admin` (
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.admin: ~4 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.admin: ~5 rows (lebih kurang)
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
 REPLACE INTO `admin` (`id`, `username`, `password`, `hak_akses`, `created_at`, `updated_at`) VALUES
 	(5, 'admin', '$2a$10$FwhWf0p2n38ZOVNAtclUwuvnc0XSKSrLvohI59c64ZcFTEvRBUc6y', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwicGFzc3dvcmQiOiIkMmEkMTAkRndoV2YwcDJuMzhaT1ZOQXRjbFV3dXZuYzBYU0tTckx2b2hJNTljNjRaY0ZURXZSQlVjNnkiLCJoYWtfYWtzZXMiOiJtYXN0ZXIiLCJpYXQiOjE1NTM2ODI1ODh9.63blf54SWl9UFLZgwqVxNWdZ7p_5GdkM_C0eh8gFTVM', '2019-03-27 17:29:48', '2019-03-27 17:29:48'),
@@ -38,7 +38,7 @@ REPLACE INTO `admin` (`id`, `username`, `password`, `hak_akses`, `created_at`, `
 	(13, 'adminDesign', '$2a$10$eLM7zAYLS/yhOkQeMJI/6euNxglyY/34.ma.k602a3g/cz6PrgIoq', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluRGVzaWduIiwicGFzc3dvcmQiOiIkMmEkMTAkZUxNN3pBWUxTL3loT2tRZU1KSS82ZXVOeGdseVkvMzQubWEuazYwMmEzZy9jejZQcmdJb3EiLCJoYWtfYWtzZXMiOiJhZG1pbiIsImlhdCI6MTU1NDEzMDg5MX0.eGS7Itq8MZvuzorfy1SDdGi4ErbXg14Oi1uDLwoq2og', '2019-04-01 22:01:31', '2019-04-01 22:01:31');
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.admin_jurusan
+-- membuang struktur untuk table tracerstudy.admin_jurusan
 CREATE TABLE IF NOT EXISTS `admin_jurusan` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `admin_id` bigint(20) NOT NULL,
@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS `admin_jurusan` (
   CONSTRAINT `FK_admin_jurusan_jurusan` FOREIGN KEY (`jurusan_id`) REFERENCES `jurusan` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.admin_jurusan: ~3 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.admin_jurusan: ~4 rows (lebih kurang)
 /*!40000 ALTER TABLE `admin_jurusan` DISABLE KEYS */;
 REPLACE INTO `admin_jurusan` (`id`, `admin_id`, `jurusan_id`, `created_at`, `updated_at`) VALUES
 	(2, 10, 1, '2019-03-29 18:48:35', '2019-03-29 18:48:35'),
@@ -61,7 +61,7 @@ REPLACE INTO `admin_jurusan` (`id`, `admin_id`, `jurusan_id`, `created_at`, `upd
 	(5, 13, 3, '2019-04-01 22:01:31', '2019-04-01 22:01:31');
 /*!40000 ALTER TABLE `admin_jurusan` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.beasiswa
+-- membuang struktur untuk table tracerstudy.beasiswa
 CREATE TABLE IF NOT EXISTS `beasiswa` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mahasiswa_id` bigint(20) unsigned NOT NULL,
@@ -74,11 +74,11 @@ CREATE TABLE IF NOT EXISTS `beasiswa` (
   CONSTRAINT `beasiswa_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.beasiswa: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.beasiswa: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `beasiswa` DISABLE KEYS */;
 /*!40000 ALTER TABLE `beasiswa` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.fakultas
+-- membuang struktur untuk table tracerstudy.fakultas
 CREATE TABLE IF NOT EXISTS `fakultas` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `nama` varchar(100) NOT NULL,
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `fakultas` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.fakultas: ~3 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.fakultas: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `fakultas` DISABLE KEYS */;
 REPLACE INTO `fakultas` (`id`, `nama`, `singkatan`, `created_at`, `updated_at`) VALUES
 	(1, 'Fakultas Teknik Industri', 'FTI', '2019-03-21 12:16:46', '2019-03-25 18:58:49'),
@@ -96,7 +96,7 @@ REPLACE INTO `fakultas` (`id`, `nama`, `singkatan`, `created_at`, `updated_at`) 
 	(3, 'Fakultas Seni Rupa dan Desain', 'FSRD', '2019-03-25 18:59:26', '2019-03-25 18:59:26');
 /*!40000 ALTER TABLE `fakultas` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.jurusan
+-- membuang struktur untuk table tracerstudy.jurusan
 CREATE TABLE IF NOT EXISTS `jurusan` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nama` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `jurusan` (
   CONSTRAINT `FK_jurusan_fakultas` FOREIGN KEY (`fakultas_id`) REFERENCES `fakultas` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.jurusan: ~12 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.jurusan: ~14 rows (lebih kurang)
 /*!40000 ALTER TABLE `jurusan` DISABLE KEYS */;
 REPLACE INTO `jurusan` (`id`, `nama`, `prodi`, `fakultas_id`, `kodeJurusan`, `akreditasi`, `created_at`, `updated_at`) VALUES
 	(1, 'Teknik Informatika', 'Informatika', 1, '15', 'B', '2019-03-21 12:17:48', '2019-03-25 19:04:02'),
@@ -131,7 +131,7 @@ REPLACE INTO `jurusan` (`id`, `nama`, `prodi`, `fakultas_id`, `kodeJurusan`, `ak
 	(16, 'Teknik Lingkungan', 'Teknik Lingkungan', 2, NULL, 'A', '2019-03-25 19:10:38', '2019-03-25 19:10:38');
 /*!40000 ALTER TABLE `jurusan` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.lulusan
+-- membuang struktur untuk table tracerstudy.lulusan
 CREATE TABLE IF NOT EXISTS `lulusan` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mahasiswa_id` bigint(20) unsigned NOT NULL,
@@ -146,14 +146,14 @@ CREATE TABLE IF NOT EXISTS `lulusan` (
   CONSTRAINT `lulusan_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.lulusan: ~2 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.lulusan: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `lulusan` DISABLE KEYS */;
 REPLACE INTO `lulusan` (`id`, `mahasiswa_id`, `ipk`, `lamaTA`, `judulTA`, `tanggalLulus`, `created_at`, `updated_at`) VALUES
 	(1, 9, '4', 'DOAKAN SAJA', 'IMPLEMENTASI NATURAL LANGUANGE PROCESSING', '2019-03-24', '2019-03-26 22:52:20', '2019-03-27 11:59:09'),
 	(7, 25, '1', '123', '123', '2019-03-18', '2019-03-26 22:52:20', '2019-03-26 22:52:20');
 /*!40000 ALTER TABLE `lulusan` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.mahasiswa
+-- membuang struktur untuk table tracerstudy.mahasiswa
 CREATE TABLE IF NOT EXISTS `mahasiswa` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `nrp` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -171,14 +171,14 @@ CREATE TABLE IF NOT EXISTS `mahasiswa` (
   CONSTRAINT `mahasiswa_jurusan_id_foreign` FOREIGN KEY (`jurusan_id`) REFERENCES `jurusan` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.mahasiswa: ~3 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.mahasiswa: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `mahasiswa` DISABLE KEYS */;
 REPLACE INTO `mahasiswa` (`id`, `nrp`, `nama`, `email`, `jurusan_id`, `alamat`, `noTelepon`, `kodePIN`, `created_at`, `updated_at`) VALUES
 	(9, '152015042', 'Faris Dewantoro', 'farisd117@gmail.com', 1, 'Komp antapanimas 19 b', '081394691345', '205741', '2019-03-26 22:52:05', '2019-03-27 11:59:24'),
 	(25, '12312345', '123123', 'fasd@gmail.com', 3, '123', '123', '123123', '2019-03-26 22:52:05', '2019-03-26 22:52:05');
 /*!40000 ALTER TABLE `mahasiswa` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.pekerjaan
+-- membuang struktur untuk table tracerstudy.pekerjaan
 CREATE TABLE IF NOT EXISTS `pekerjaan` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mahasiswa_id` bigint(20) unsigned NOT NULL,
@@ -186,35 +186,41 @@ CREATE TABLE IF NOT EXISTS `pekerjaan` (
   `tanggalMasuk` date NOT NULL,
   `tempat` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `jabatan` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `pekerjaan_mahasiswa_id_foreign` (`mahasiswa_id`),
   CONSTRAINT `pekerjaan_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.pekerjaan: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.pekerjaan: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `pekerjaan` DISABLE KEYS */;
+REPLACE INTO `pekerjaan` (`id`, `mahasiswa_id`, `namaPerusahaan`, `tanggalMasuk`, `tempat`, `jabatan`, `created_at`, `updated_at`) VALUES
+	(1, 9, 'askdaskd', '2019-04-10', 'asdaskdkasd', 'asdasdkaskdk', '2019-04-10 13:55:22', '2019-04-10 13:55:22');
 /*!40000 ALTER TABLE `pekerjaan` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.prestasi
+-- membuang struktur untuk table tracerstudy.prestasi
 CREATE TABLE IF NOT EXISTS `prestasi` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `mahasiswa_id` bigint(20) unsigned NOT NULL,
   `namaPrestasi` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tahun` date NOT NULL,
+  `jenisPrestasi` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tahun` year(4) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `prestasi_mahasiswa_id_foreign` (`mahasiswa_id`),
   CONSTRAINT `prestasi_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Dumping data for table tracerstudy.prestasi: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.prestasi: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `prestasi` DISABLE KEYS */;
+REPLACE INTO `prestasi` (`id`, `mahasiswa_id`, `namaPrestasi`, `jenisPrestasi`, `tahun`, `created_at`, `updated_at`) VALUES
+	(1, 9, 'asd', NULL, '0000', NULL, NULL),
+	(2, 9, 'asd', NULL, '2029', NULL, NULL);
 /*!40000 ALTER TABLE `prestasi` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.quisoner
+-- membuang struktur untuk table tracerstudy.quisoner
 CREATE TABLE IF NOT EXISTS `quisoner` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `judul` varchar(50) NOT NULL DEFAULT '0',
@@ -224,11 +230,11 @@ CREATE TABLE IF NOT EXISTS `quisoner` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.quisoner: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.quisoner: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `quisoner` DISABLE KEYS */;
 /*!40000 ALTER TABLE `quisoner` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.q_jawaban
+-- membuang struktur untuk table tracerstudy.q_jawaban
 CREATE TABLE IF NOT EXISTS `q_jawaban` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `q_pertanyaan_id` bigint(20) NOT NULL,
@@ -243,11 +249,11 @@ CREATE TABLE IF NOT EXISTS `q_jawaban` (
   CONSTRAINT `FK_q_jawaban_q_pertanyaan` FOREIGN KEY (`q_pertanyaan_id`) REFERENCES `q_pertanyaan` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.q_jawaban: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.q_jawaban: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `q_jawaban` DISABLE KEYS */;
 /*!40000 ALTER TABLE `q_jawaban` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.q_jawaban_lainnya
+-- membuang struktur untuk table tracerstudy.q_jawaban_lainnya
 CREATE TABLE IF NOT EXISTS `q_jawaban_lainnya` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `q_jawaban_id` bigint(20) NOT NULL DEFAULT '0',
@@ -260,11 +266,27 @@ CREATE TABLE IF NOT EXISTS `q_jawaban_lainnya` (
   CONSTRAINT `FK_q_jawaban_lainnya_q_jawaban` FOREIGN KEY (`q_jawaban_id`) REFERENCES `q_jawaban` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.q_jawaban_lainnya: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.q_jawaban_lainnya: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `q_jawaban_lainnya` DISABLE KEYS */;
 /*!40000 ALTER TABLE `q_jawaban_lainnya` ENABLE KEYS */;
 
--- Dumping structure for table tracerstudy.q_pertanyaan
+-- membuang struktur untuk table tracerstudy.q_jawaban_user
+CREATE TABLE IF NOT EXISTS `q_jawaban_user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `jawaban_id` bigint(20) NOT NULL,
+  `jawaban_lainnya` text,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `FK_q_jawaban_user_q_jawaban` (`jawaban_id`),
+  CONSTRAINT `FK_q_jawaban_user_q_jawaban` FOREIGN KEY (`jawaban_id`) REFERENCES `q_jawaban` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Membuang data untuk tabel tracerstudy.q_jawaban_user: ~0 rows (lebih kurang)
+/*!40000 ALTER TABLE `q_jawaban_user` DISABLE KEYS */;
+/*!40000 ALTER TABLE `q_jawaban_user` ENABLE KEYS */;
+
+-- membuang struktur untuk table tracerstudy.q_pertanyaan
 CREATE TABLE IF NOT EXISTS `q_pertanyaan` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `quisoner_id` bigint(20) NOT NULL,
@@ -278,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `q_pertanyaan` (
   CONSTRAINT `FK_q_pertanyaan_quisoner` FOREIGN KEY (`quisoner_id`) REFERENCES `quisoner` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table tracerstudy.q_pertanyaan: ~0 rows (approximately)
+-- Membuang data untuk tabel tracerstudy.q_pertanyaan: ~0 rows (lebih kurang)
 /*!40000 ALTER TABLE `q_pertanyaan` DISABLE KEYS */;
 /*!40000 ALTER TABLE `q_pertanyaan` ENABLE KEYS */;
 

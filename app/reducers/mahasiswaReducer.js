@@ -5,6 +5,8 @@ import isEmpty from '../lib/is-empty';
 const initialState = {
     mahasiswa:[],
     edit:null,
+    pekerjaan:[],
+    prestasi:[],
     loading:false
 };
 
@@ -16,6 +18,18 @@ export default function (state = initialState, action) {
                 ...state,
                 loading: true,
                 mahasiswa:action.payload
+            }
+        case MAHASISWA.getAllPekerjaan:
+            return{
+                ...state,
+                loading:true,
+                pekerjaan:action.payload
+            }
+        case MAHASISWA.getAllPrestasi:
+            return{
+                ...state,
+                loading:true,
+                prestasi:action.payload
             }
         case MAHASISWA.edit:
             return{

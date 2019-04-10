@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Select from '../../../components/common/select';
 import SelectDynamic from '../../../components/common/selectDynamic';
 import { getAllJurusan } from '../../../actions/JurusanActions';
-import {getAllMahasiswa,addPekerjaan} from '../../../actions/MahasiswaActions';
+import {getAllMahasiswa,addPrestasi} from '../../../actions/MahasiswaActions';
 import moment from 'moment';
 const ListJurusan = (jurusans) => {
 
@@ -51,7 +51,7 @@ const ListMahasiswa = (mahasiswas) => {
 
 
 
-class DataPekerjaanCreate extends Component {
+class DataPrestasiCreate extends Component {
     static async getInitialProps(something) {
         const { res, req } = something;
         if (!req.user) {
@@ -68,10 +68,9 @@ class DataPekerjaanCreate extends Component {
             jurusan:'',
             nrp:'',
             nama:'',
-            namaPerusahaan:'',
-            tanggalMasuk:moment(new Date).format('YYYY-MM-DD'),
-            tempat:'',
-            jabatan:''
+            namaPrestasi:'',
+            jenisPrestasi:'',
+            tahun:''
 
         }
     }
@@ -106,29 +105,29 @@ class DataPekerjaanCreate extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let data = this.state;
-        this.props.addPekerjaan(data);
+        this.props.addPrestasi(data);
 
     }
 
     render() {
         const { classes, jurusans,mahasiswas } = this.props;
-        const { jurusan,nama,nrp,tanggalMasuk,tempat,jabatan,namaPerusahaan} = this.state;
+        const { jurusan,nama,nrp,tanggalMasuk,jenisPrestasi,tahun,namaPrestasi} = this.state;
         return (
-            <Layout2 url={`/data-pekerjaan`}>
+            <Layout2 url={`/data-prestasi`}>
                 <div>
                     <Grid container direction="column" spacing={16}>
                         <Grid item xs={12}>
                             <Card style={{ overflow: 'inherit' }}>
                                 <form onSubmit={this.handleSubmit}>
-                          
+
                                     <CardContent>
                                         <Select jurusans={ListJurusan(jurusans)}
                                             jurusan={jurusan}
                                             handlerChangeJurusan={this.handlerChangeJurusan} />
-                                        <SelectDynamic 
-                                        label="NRP" 
+                                        <SelectDynamic
+                                        label="NRP"
                                         value={nrp}
-                                        options={ListMahasiswa(mahasiswas)} 
+                                        options={ListMahasiswa(mahasiswas)}
                                         handleChange={this.handlerChangeMahasiswa}
                                         />
                                         <TextField
@@ -143,52 +142,42 @@ class DataPekerjaanCreate extends Component {
                                             margin="normal"
                                         />
                                         <TextField
-                                            label="Nama Perusahaan"
-                                            name="namaPerusahaan"
+                                            label="Nama Prestasi"
+                                            name="namaPrestasi"
                                             InputLabelProps={{
                                                 shrink: true
                                             }}
-                                            value={namaPerusahaan}
+                                            value={namaPrestasi}
+                                            fullWidth
+                                            margin="normal"
+                                            onChange={this.handleOnChange}
+                                        />
+
+                                        <TextField
+                                            label="Jenis Prestasi"
+                                            name="jenisPrestasi"
+                                            InputLabelProps={{
+                                                shrink: true
+                                            }}
+                                            value={jenisPrestasi}
                                             fullWidth
                                             margin="normal"
                                             onChange={this.handleOnChange}
                                         />
                                         <TextField
-                                            label="Tanggal Masuk"
-                                            name="tanggalMasuk"
+                                            label="Tahun"
+                                            name="tahun"
                                             InputLabelProps={{
                                                 shrink: true
                                             }}
+                                            type="number"
                                             fullWidth
-                                            margin="normal"
-                                            type="date"
-                                            value={tanggalMasuk}
-                                            onChange={this.handleOnChange}
-                                        />
-                                        <TextField
-                                            label="Tempat"
-                                            name="tempat"
-                                            InputLabelProps={{
-                                                shrink: true
-                                            }}
-                                            value={tempat}
-                                            fullWidth
+                                            value={tahun}
                                             margin="normal"
                                             onChange={this.handleOnChange}
                                         />
-                                        <TextField
-                                            label="Jabatan"
-                                            name="jabatan"
-                                            InputLabelProps={{
-                                                shrink: true
-                                            }}
-                                            fullWidth
-                                            value={jabatan}
-                                            margin="normal"
-                                            onChange={this.handleOnChange}
-                                        />
-                                 
-                                  
+
+
 
 
                                     </CardContent>
@@ -211,12 +200,12 @@ class DataPekerjaanCreate extends Component {
     }
 }
 
-DataPekerjaanCreate.propTypes = {
+DataPrestasiCreate.propTypes = {
     classes: PropTypes.object.isRequired,
     jurusans:PropTypes.object.isRequired,
     getAllMahasiswa:PropTypes.func.isRequired,
     getAllMahasiswa:PropTypes.func.isRequired,
-    addPekerjaan:PropTypes.func.isRequired,
+    addPrestasi:PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
@@ -224,5 +213,5 @@ const mapStateToProps = (state) => ({
     mahasiswas:state.mahasiswas
 });
 
-export default compose(withStyles(styles), connect(mapStateToProps, { getAllJurusan,getAllMahasiswa,addPekerjaan }))
-    (DataPekerjaanCreate);
+export default compose(withStyles(styles), connect(mapStateToProps, { getAllJurusan,getAllMahasiswa,addPrestasi }))
+    (DataPrestasiCreate);

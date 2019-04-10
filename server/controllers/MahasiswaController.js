@@ -8,13 +8,13 @@ class MahasiswaController{
         if (!isValid) {
             return res.status(400).json(errors);
         }
-        
+
         let mahasiswa = req.body.mahasiswa;
         let queryInsertMahasiswa = new MahasiswaModel().InsertMahasiswa;
         let queryInsertLulusan = new MahasiswaModel().InsertLulusan;
         if(mahasiswa.jurusan){
             mahasiswa.jurusan_id = mahasiswa.jurusan.value;
-            delete mahasiswa.jurusan; 
+            delete mahasiswa.jurusan;
         }
 
         async.waterfall([
@@ -34,11 +34,11 @@ class MahasiswaController{
                       if (err) callback(err);
                       if(result){
                           callback(null, result);
-                      }  
+                      }
                 });
             }
         ],function(err,result){
-         
+
              if (err) return res.status(400).json(err);
              if (result) {
                 return res.status(200).json(result);
@@ -109,6 +109,40 @@ class MahasiswaController{
             }
         })
     }
+
+    addPekerjaan(req,res){
+        let queryInsert = new MahasiswaModel().addPekerjaan;
+        let data ={
+            mahasiswa_id:req.body.nrp.value,
+            namaPerusahaan:req.body.namaPerusahaan,
+            tanggalMasuk:req.body.tanggalMasuk,
+            tempat:req.body.tempat,
+            jabatan:req.body.jabatan,
+        }
+        db.query(queryInsert,[data],(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    addPrestasi(req,res){
+        let queryInsert = new MahasiswaModel().addPrestasi;
+        let data ={
+            mahasiswa_id:req.body.nrp.value,
+            namaPrestasi:req.body.namaPrestasi,
+            jenisPrestasi:req.body.jenisPrestasi,
+            tahun:req.body.tahun,
+        }
+
+        db.query(queryInsert,[data],(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+
     delete(req,res){
         let queryDelete = new MahasiswaModel().deleteMahasiswa;
         db.query(queryDelete,[req.body.mahasiswa_id],(err, result) => {
@@ -121,6 +155,30 @@ class MahasiswaController{
                         return res.status(200).json(result);
                     }
                 })
+            }
+        })
+    }
+    getAllPekerjaan(req,res){
+        let querySelectAll = new MahasiswaModel().getAllPekerjaan;
+        if(req.user && req.user.jurusan_id && req.user.hak_akses === 'admin'){
+            querySelectAll = new MahasiswaModel().getAllJurusanPekerjaan(req.user.jurusan_id);
+        }
+        db.query(querySelectAll,(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    getAllPrestasi(req,res){
+        let querySelectAll = new MahasiswaModel().getAllPrestasi;
+        if(req.user && req.user.jurusan_id && req.user.hak_akses === 'admin'){
+            querySelectAll = new MahasiswaModel().getAllJurusanPrestasi(req.user.jurusan_id);
+        }
+        db.query(querySelectAll,(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
             }
         })
     }

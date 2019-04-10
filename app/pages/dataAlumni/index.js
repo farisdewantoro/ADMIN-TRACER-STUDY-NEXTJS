@@ -13,7 +13,6 @@ import {
   IconButton,
   Paper,
   InputBase,
-  TextField
 } from '@material-ui/core';
 import CreateIcon from '@material-ui/icons/Create';
 import Link from 'next/link';
@@ -21,7 +20,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import { getAllMahasiswa, deleteMahasiswa} from '../../actions/MahasiswaActions';
-import MenuIcon from '@material-ui/icons/Menu';
+
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import DeleteIcon from '@material-ui/icons/Delete';

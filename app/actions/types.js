@@ -25,7 +25,9 @@ export const ADMIN={
 export const MAHASISWA = {
     loading:'MAHASISWA:LOADING',
     getAll:'MAHASISWA:GETALL',
-    edit:'MAHASISWA:EDIT'
+    edit:'MAHASISWA:EDIT',
+    getAllPekerjaan:'MAHASISWA:GETALL-PEKERJAAN',
+    getAllPrestasi:'MAHASISWA:GETALL-PRESTASI'
 };
 
 // export const GET_ALL_JURUSAN = 'GET_ALL_JURUSAN';

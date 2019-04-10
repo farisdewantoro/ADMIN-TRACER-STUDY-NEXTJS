@@ -8,6 +8,8 @@ export const loadingAdmin = () => {
     }
 }
 
+
+
 export const getAllAdmin = ()=>disbatch=>{
     disbatch(loadingAdmin());
     axios.get('/api/admin/get-all')

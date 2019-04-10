@@ -19,11 +19,11 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import {getAllPekerjaan} from '../../actions/MahasiswaActions';
+import {getAllPrestasi} from '../../actions/MahasiswaActions';
 import DialogDelete from '../../components/common/DialogDelete';
 import moment from 'moment';
 import CreateIcon from '@material-ui/icons/Create';
-class DataPekerjaan extends Component {
+class DataPrestasi extends Component {
     static async getInitialProps(something) {
         const { res, req } = something;
         if (!req.user) {
@@ -41,7 +41,7 @@ class DataPekerjaan extends Component {
 
 
     componentDidMount() {
-        this.props.getAllPekerjaan();
+        this.props.getAllPrestasi();
     }
     openDialogDelete=(id)=>{
         this.setState({ dialogDelete: true, mahasiswa_id:id });
@@ -49,27 +49,27 @@ class DataPekerjaan extends Component {
       closeDialogDelete=()=>{
         this.setState({ dialogDelete: false,mahasiswa_id:0 });
       }
-    
+
       dialogDeleteSubmit = ()=>{
         this.props.deleteMahasiswa(this.state.mahasiswa_id);
       }
-    
+
 
     render() {
         const { classes,mahasiswas} = this.props;
         return (
-            <Layout2 url={'/data-pekerjaan'}>
+            <Layout2 url={'/data-prestasi'}>
                 <div>
                     <Grid container direction="column" spacing={16}>
                         <Grid item xs={12}>
-                            <a href="/data-pekerjaan/create">
+                            <a href="/data-prestasi/create">
                                 <Button variant="contained" color="primary">
                                     TAMBAH DATA
               </Button>
                             </a>
 
                         </Grid>
-                        <Grid item xs={12}>
+                       <Grid item xs={12}>
 
  <Paper className={classes.root} elevation={1}>
                 <IconButton className={classes.iconButton} aria-label="Search">
@@ -77,13 +77,13 @@ class DataPekerjaan extends Component {
                 </IconButton>
                 <Divider className={classes.divider} />
                 <InputBase className={classes.input} placeholder="Search " />
-         
+
                 <IconButton color="primary" className={classes.iconButton} aria-label="Directions">
                   <DirectionsIcon />
                 </IconButton>
               </Paper>
           </Grid>
-            {mahasiswas.pekerjaan.map((m,i)=>{
+            {mahasiswas.prestasi.map((m,i)=>{
               return(
                 <Grid item xs={12} key={m.id}>
                   <Card className={classes.card}>
@@ -99,37 +99,33 @@ class DataPekerjaan extends Component {
                             <div className={classes.box}>
                               <div className={classes.card}>
                                 <Typography className={classes.ListParent}>
-                                  Nama Perusahaan :
+                                  Nama Prestasi :
                    </Typography>
                                 <Typography className={classes.listChild}>
-                                  {m.namaPerusahaan}
+                                  {m.namaPrestasi}
                    </Typography>
 
                                 <Typography className={classes.ListParent}>
-                                  Tempat :
+                                  Jenis Prestasi :
                    </Typography>
                                 <Typography className={classes.listChild}>
-                                  {m.tempat}
+                                  {m.jenisPrestasi}
                    </Typography>
 
-                                <Typography className={classes.ListParent}>
-                                  Tanggal Masuk :
-                   </Typography>
-                                <Typography className={classes.listChild}>
-                                  {moment(m.tanggalMasuk).format('LL')}
-                   </Typography>
+
+
                    <Typography className={classes.ListParent}>
-                                  Jabatan :
+                                  Tahun :
                    </Typography>
                    <Typography className={classes.listChild}>
-                                 {m.jabatan}
+                                 {m.tahun}
                    </Typography>
 
 
                               </div>
 
                               <div className={classes.action}>
-                              <a href={`/data-pekerjaan/edit/${m.nrp}`}>
+                              <a href={`/data-prestasi/edit/${m.nrp}`}>
                                 <IconButton>
                                   <CreateIcon />
                                 </IconButton>
@@ -137,7 +133,7 @@ class DataPekerjaan extends Component {
                                 <IconButton onClick={()=>this.openDialogDelete(m.id)}>
                                     <DeleteIcon/>
                                   </IconButton>
-                           
+
                               </div>
 
 
@@ -153,7 +149,7 @@ class DataPekerjaan extends Component {
                 </Grid>
               )
             })}
-            
+
                     </Grid>
                     <DialogDelete
             openDialogDelete={this.openDialogDelete}
@@ -168,14 +164,14 @@ class DataPekerjaan extends Component {
     }
 }
 
-DataPekerjaan.propTypes = {
+DataPrestasi.propTypes = {
     classes: PropTypes.object.isRequired,
     mahasiswas: PropTypes.object.isRequired,
-    getAllPekerjaan: PropTypes.func.isRequired,
+    getAllPrestasi: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
    mahasiswas:state.mahasiswas
 });
 
-export default compose(withStyles(styles), connect(mapStateToProps, {getAllPekerjaan  }))(DataPekerjaan);
+export default compose(withStyles(styles), connect(mapStateToProps, {getAllPrestasi  }))(DataPrestasi);

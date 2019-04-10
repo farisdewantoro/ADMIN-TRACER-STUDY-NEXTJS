@@ -3,6 +3,9 @@ const {FakultasModel} = require('../models');
 class FakultasController{
     getAll(req,res){
         let querySelectAll = new FakultasModel().querySelectAllWithJurusan;
+        if(req.user && req.user.jurusan_id && req.user.hak_akses === 'admin'){
+          querySelectAll = new FakultasModel().getJurusanById(req.user.jurusan_id);
+        }
         db.query(querySelectAll,(err,result)=>{
 
             if(err) return res.status(400).json(err);
