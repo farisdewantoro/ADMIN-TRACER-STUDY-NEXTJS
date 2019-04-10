@@ -4,7 +4,8 @@ const {
     MahasiswaController,
     AuthController,
     AdminController,
-    FakultasController
+    FakultasController,
+    QuisonerController
 } = require('../controllers');
 class AppRouter{
     constructor(){
@@ -12,6 +13,10 @@ class AppRouter{
         this.buildRoutes();
     }
     buildRoutes(){
+        this.router.post('/api/quisoner/create', QuisonerController.create);
+        this.router.get('/api/quisoner/get-all', QuisonerController.getAll);
+
+
         this.router.post("/api/auth/login",AuthController.signin);
         this.router.post("/api/auth/logout", AuthController.logout);
         

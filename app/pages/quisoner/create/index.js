@@ -21,8 +21,29 @@ import update from 'react-addons-update';
 import CloseIcon from '@material-ui/icons/Close';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 import Link from 'next/link';
+import {connect} from 'react-redux';
+import {compose} from 'redux';
+import { createQuisoner} from '../../../actions/quisonerActions';
+import PropTypes from 'prop-types';
 class EditQuisoner extends Component {
+  static async getInitialProps(something) {
+    const { res, req } = something;
+    if (!req.user) {
+      res.writeHead(302, {
+        Location: '/login'
+      })
+      res.end()
+    }
+    let adminProps = req.user;
+    return {
+      adminProps
+    }
+  }
   state={
+    quisoner:{
+      judul:'',
+      tahun:''
+    },
       q_pertanyaan:[
         {kode:'',pertanyaan:'',q_jawaban:[
             {kode:'',jawaban:'',additional:false,q_jawaban_lainnya:{}},
@@ -86,7 +107,7 @@ class EditQuisoner extends Component {
   handlerAddAdditional = (iq,ij)=>{
     this.setState({
       q_pertanyaan: update(this.state.q_pertanyaan, 
-        {[iq]:{ q_jawaban: {[ij]:{additional:{$set:true},q_jawaban_lainnya: { $set:{ description: '', value: ''}}}}}  })
+        {[iq]:{ q_jawaban: {[ij]:{additional:{$set:true},q_jawaban_lainnya: { $set:{ description: ''}}}}}  })
     });
   }
   handlerDeleteAdditional = (iq,ij)=>{
@@ -99,12 +120,27 @@ class EditQuisoner extends Component {
     const val = e.target.value;
     this.setState({
       q_pertanyaan: update(this.state.q_pertanyaan,
-        { [iq]: { q_jawaban: { [ij]: { additional: { $set: true }, q_jawaban_lainnya: { $set: { description:val, value: '' } } } } } })
+        { [iq]: { q_jawaban: { [ij]: { additional: { $set: true }, q_jawaban_lainnya: { $set: { description:val } } } } } })
     });
+  }
+  handlerChangeQuisoner =(e)=>{
+    let val = e.target.value;
+    let name = e.target.name;
+    this.setState(prevState=>({
+      quisoner:{
+        ...prevState.quisoner,
+        [name]:val
+      }
+    }))
+  }
+  handleSubmit =()=>{
+    let data = this.state;
+    console.log(data);
+    this.props.createQuisoner(data);
   }
   render() {
     const { q_pertanyaan} = this.state;
- 
+    const {tahun,judul} = this.state.quisoner;
     return (
       <Layout2 url={'/data-quisoner'}>
         <div style={{paddingBottom:"20px"}}>
@@ -117,6 +153,24 @@ class EditQuisoner extends Component {
             
                     <CardContent>
                         <Grid container direction="column" spacing={16} >
+                        <Grid item md={12}>
+                      <TextField
+                        label="Judul"
+                        name="judul"
+                        value={judul}
+                        fullWidth
+                        margin="normal"
+                        onChange={this.handlerChangeQuisoner}
+                      />
+                      <TextField
+                        label="Tahun"
+                        name="tahun"
+                        value={tahun}
+                        fullWidth
+                        margin="normal"
+                        onChange={this.handlerChangeQuisoner}
+                      />
+                        </Grid>
                     {q_pertanyaan.map((qp,iQ)=>{
                         return(
                           <Grid item md={12} key={iQ}>
@@ -262,14 +316,22 @@ class EditQuisoner extends Component {
                     </CardContent>
                 <AppBar position="static" color="default" elevation={0}>
                         <Toolbar>
-                    <Button variant="contained" color="primary" style={{ margin: "0px 5px" }}>  
+                    <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={this.handleSubmit}
+                    style={{ margin: "0px 5px" }}>  
                                 SAVE
                             </Button>
-                          <Link href="/data-quisoner">
-                      <Button variant="flat" style={{ margin: "0px 5px" }} color="primary" >
+                          <a href="/data-quisoner">
+                      <Button 
+
+                      variant="flat" 
+                      style={{ margin: "0px 5px" }} 
+                      color="primary" >
                         CANCEL
                             </Button>
-                          </Link>
+                          </a>
                         
                         </Toolbar>
                     </AppBar>
@@ -283,4 +345,10 @@ class EditQuisoner extends Component {
   }
 }
 
-export default EditQuisoner
+EditQuisoner.propTypes={
+  classes:PropTypes.object.isRequired,
+  createQuisoner:PropTypes.func.isRequired
+}
+export default compose(
+  connect(null,{createQuisoner})
+)(EditQuisoner)

@@ -14,6 +14,12 @@ export const AUTH={
     removeLoading:'AUTH:REMOVE_LOADING'
 }
 
+// Quisoner
+export const QUISONER={
+    getAll:'QUISONER:GETALL',
+    loading:'QUISONER:LOADING'
+}
+
 // ADMIN
 export const ADMIN={
     create:'ADMIN:CREATE',

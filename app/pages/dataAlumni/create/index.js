@@ -25,6 +25,19 @@ function getSteps() {
 
 
 class CreateDataAlumni extends React.Component {
+    static async getInitialProps(something) {
+        const { res, req } = something;
+        if (!req.user) {
+            res.writeHead(302, {
+                Location: '/login'
+            })
+            res.end()
+        }
+        let adminProps = req.user;
+        return{
+            adminProps
+        }
+    }
     state = {
         activeStep: 0,
         skipped: new Set(),
@@ -59,6 +72,7 @@ class CreateDataAlumni extends React.Component {
     }
 
     componentWillReceiveProps(nextProps){
+
         if(nextProps.errors !== this.props.errors){
             if(Object.keys(nextProps.errors).length > 0){
                 this.setState({
@@ -92,7 +106,7 @@ class CreateDataAlumni extends React.Component {
                ...prevState.mahasiswa,
                jurusan:e
            }
-       }))
+       }));
     }
 
     getStepContent = (step)=>{

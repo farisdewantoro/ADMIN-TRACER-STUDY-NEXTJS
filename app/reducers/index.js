@@ -6,6 +6,7 @@ import mahasiswaReducer from './mahasiswaReducer';
 import jurusanReducer from './jurusanReducer';
 import adminReducer from './adminReducer';
 import fakultasReducer from './fakultasReducer';
+import quisonerReducer from './quisonerReducer';
 export default combineReducers({
     auths: authReducers,
     errors: errorReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
     mahasiswas: mahasiswaReducer,
     jurusans: jurusanReducer,
     admins: adminReducer,
-    fakultass: fakultasReducer
+    fakultass: fakultasReducer,
+    quisoners: quisonerReducer
 });
