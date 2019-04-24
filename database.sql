@@ -144,13 +144,14 @@ CREATE TABLE IF NOT EXISTS `lulusan` (
   PRIMARY KEY (`id`),
   KEY `lulusan_mahasiswa_id_foreign` (`mahasiswa_id`),
   CONSTRAINT `lulusan_mahasiswa_id_foreign` FOREIGN KEY (`mahasiswa_id`) REFERENCES `mahasiswa` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel tracerstudy.lulusan: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `lulusan` DISABLE KEYS */;
 REPLACE INTO `lulusan` (`id`, `mahasiswa_id`, `ipk`, `lamaTA`, `judulTA`, `tanggalLulus`, `created_at`, `updated_at`) VALUES
 	(1, 9, '4', 'DOAKAN SAJA', 'IMPLEMENTASI NATURAL LANGUANGE PROCESSING', '2019-03-24', '2019-03-26 22:52:20', '2019-03-27 11:59:09'),
-	(7, 25, '1', '123', '123', '2019-03-18', '2019-03-26 22:52:20', '2019-03-26 22:52:20');
+	(7, 25, '1', '123', '123', '2019-03-18', '2019-03-26 22:52:20', '2019-03-26 22:52:20'),
+	(8, 26, '4.00', '2 taun', 'pengen beli beus', '2019-01-12', '2019-04-11 09:42:44', '2019-04-11 09:42:44');
 /*!40000 ALTER TABLE `lulusan` ENABLE KEYS */;
 
 -- membuang struktur untuk table tracerstudy.mahasiswa
@@ -169,13 +170,14 @@ CREATE TABLE IF NOT EXISTS `mahasiswa` (
   UNIQUE KEY `nrp` (`nrp`),
   KEY `mahasiswa_jurusan_id_foreign` (`jurusan_id`),
   CONSTRAINT `mahasiswa_jurusan_id_foreign` FOREIGN KEY (`jurusan_id`) REFERENCES `jurusan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Membuang data untuk tabel tracerstudy.mahasiswa: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `mahasiswa` DISABLE KEYS */;
 REPLACE INTO `mahasiswa` (`id`, `nrp`, `nama`, `email`, `jurusan_id`, `alamat`, `noTelepon`, `kodePIN`, `created_at`, `updated_at`) VALUES
 	(9, '152015042', 'Faris Dewantoro', 'farisd117@gmail.com', 1, 'Komp antapanimas 19 b', '081394691345', '205741', '2019-03-26 22:52:05', '2019-03-27 11:59:24'),
-	(25, '12312345', '123123', 'fasd@gmail.com', 3, '123', '123', '123123', '2019-03-26 22:52:05', '2019-03-26 22:52:05');
+	(25, '12312345', '123123', 'fasd@gmail.com', 3, '123', '123', '123123', '2019-03-26 22:52:05', '2019-03-26 22:52:05'),
+	(26, '152015033', 'Ficar Dean', 'ficarchupokemon@gmail.com', 10, 'soreang', '12312031', '479001', '2019-04-11 09:42:44', '2019-04-11 09:42:44');
 /*!40000 ALTER TABLE `mahasiswa` ENABLE KEYS */;
 
 -- membuang struktur untuk table tracerstudy.pekerjaan
@@ -225,13 +227,16 @@ CREATE TABLE IF NOT EXISTS `quisoner` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `judul` varchar(50) NOT NULL DEFAULT '0',
   `tahun` char(50) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel tracerstudy.quisoner: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel tracerstudy.quisoner: ~2 rows (lebih kurang)
 /*!40000 ALTER TABLE `quisoner` DISABLE KEYS */;
+REPLACE INTO `quisoner` (`id`, `judul`, `tahun`, `status`, `created_at`, `updated_at`) VALUES
+	(7, 'QUISONER-2019', '2019', 1, '2019-04-11 09:23:29', '2019-04-11 09:25:49');
 /*!40000 ALTER TABLE `quisoner` ENABLE KEYS */;
 
 -- membuang struktur untuk table tracerstudy.q_jawaban
@@ -240,17 +245,22 @@ CREATE TABLE IF NOT EXISTS `q_jawaban` (
   `q_pertanyaan_id` bigint(20) NOT NULL,
   `kode` char(50) NOT NULL,
   `jawaban` text NOT NULL,
-  `additional` enum('Y','N') NOT NULL DEFAULT 'N',
+  `additional` tinyint(4) NOT NULL DEFAULT '0',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `kode` (`kode`),
   KEY `FK_q_jawaban_q_pertanyaan` (`q_pertanyaan_id`),
   CONSTRAINT `FK_q_jawaban_q_pertanyaan` FOREIGN KEY (`q_pertanyaan_id`) REFERENCES `q_pertanyaan` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel tracerstudy.q_jawaban: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel tracerstudy.q_jawaban: ~4 rows (lebih kurang)
 /*!40000 ALTER TABLE `q_jawaban` DISABLE KEYS */;
+REPLACE INTO `q_jawaban` (`id`, `q_pertanyaan_id`, `kode`, `jawaban`, `additional`, `created_at`, `updated_at`) VALUES
+	(10, 8, 'F401', 'Melalui iklan dikoran atau majalah', 0, '2019-04-11 09:23:30', '2019-04-11 09:23:30'),
+	(11, 8, 'F402', 'Melamar keperusahaan tanpa mengetahui lowongan', 0, '2019-04-11 09:23:30', '2019-04-11 09:23:30'),
+	(12, 8, 'F403', 'Pergi ke pameran kerja', 0, '2019-04-11 09:23:30', '2019-04-11 09:23:30'),
+	(13, 9, 'F05', 'Pergi ke pameran kerja', 0, '2019-04-11 09:23:30', '2019-04-11 09:27:28');
 /*!40000 ALTER TABLE `q_jawaban` ENABLE KEYS */;
 
 -- membuang struktur untuk table tracerstudy.q_jawaban_lainnya
@@ -298,10 +308,14 @@ CREATE TABLE IF NOT EXISTS `q_pertanyaan` (
   UNIQUE KEY `kode` (`kode`),
   KEY `FK_q_pertanyaan_quisoner` (`quisoner_id`),
   CONSTRAINT `FK_q_pertanyaan_quisoner` FOREIGN KEY (`quisoner_id`) REFERENCES `quisoner` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 
--- Membuang data untuk tabel tracerstudy.q_pertanyaan: ~0 rows (lebih kurang)
+-- Membuang data untuk tabel tracerstudy.q_pertanyaan: ~3 rows (lebih kurang)
 /*!40000 ALTER TABLE `q_pertanyaan` DISABLE KEYS */;
+REPLACE INTO `q_pertanyaan` (`id`, `quisoner_id`, `kode`, `pertanyaan`, `created_at`, `updated_at`) VALUES
+	(8, 7, 'F3', 'F3', '2019-04-11 09:23:29', '2019-04-11 09:23:29'),
+	(9, 7, 'F4', 'F4', '2019-04-11 09:23:29', '2019-04-11 09:23:29'),
+	(10, 7, 'F5', 'F5', '2019-04-11 09:23:29', '2019-04-11 09:23:29');
 /*!40000 ALTER TABLE `q_pertanyaan` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -48,7 +48,7 @@ class DataQuisoner extends Component {
                 <div>
                     <Grid container direction="column" spacing={16}>
                         <Grid item xs={12}>
-                            <Link href="/data-jurusan/create">
+                            <Link href="/data-quisoner/create">
                                 <Button variant="contained" color="primary">
                                     TAMBAH DATA
               </Button>
@@ -62,7 +62,7 @@ class DataQuisoner extends Component {
                                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                                         <div className={classes.box}>
                                                 <Typography className={classes.ListParent}>
-                                                    Judul : 
+                                                    Judul :
                                          </Typography>
                                                 <Typography className={classes.listChild}>
                                                     {q.judul}
@@ -74,7 +74,7 @@ class DataQuisoner extends Component {
                                                     {q.tahun}
                                                 </Typography>
                                         </div>
-                                        
+
                                         </ExpansionPanelSummary>
                                         <ExpansionPanelDetails>
                                             <List style={{ width: '100%' }}>
