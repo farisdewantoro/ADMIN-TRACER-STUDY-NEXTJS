@@ -1,7 +1,7 @@
 const routes = require('next-routes')
 
 module.exports = routes()
-    .add('home','/','index')
+    .add('home', '/','dataAlumni')
     .add('login','/login','login')
     .add('tes','/login/tes','dashboard')
     .add('identitas', '/identitas', 'identitas')
