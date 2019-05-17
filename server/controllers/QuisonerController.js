@@ -118,10 +118,16 @@ class QuisonerController{
     }
     getAll(req,res){
         const querSelectQuisoner = new QuisonerModel().selectQuisoner;
+        const querySelectQU = new QuisonerModel().selectQ_user;
         async.parallel({
             quisoner:function(callback){
                 db.query(querSelectQuisoner,(err,result)=>{
                     callback(err,result);
+                })
+            },
+            q_user:function(callback){
+                db.query(querySelectQU,(err,result)=>{
+                    callback(err, result);
                 })
             }
         },function(err,result){

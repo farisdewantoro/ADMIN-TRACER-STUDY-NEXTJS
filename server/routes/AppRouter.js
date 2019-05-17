@@ -31,10 +31,16 @@ class AppRouter{
         this.router.get('/api/mahasiswa/get/:nrp', MahasiswaController.edit);
         this.router.put('/api/mahasiswa/update/:nrp', MahasiswaController.update);
         this.router.post('/api/mahasiswa/add/pekerjaan', MahasiswaController.addPekerjaan);
+        this.router.put('/api/mahasiswa/update/pekerjaan/:nrp', MahasiswaController.updatePekerjaan);
+        this.router.delete('/api/mahasiswa/delete/pekerjaan/:id',MahasiswaController.deletePekerjaan);
+
         this.router.post('/api/mahasiswa/add/prestasi', MahasiswaController.addPrestasi);
         this.router.get('/api/mahasiswa/getall/pekerjaan',MahasiswaController.getAllPekerjaan)
         this.router.get('/api/mahasiswa/getall/prestasi',MahasiswaController.getAllPrestasi)
-
+        this.router.get('/api/mahasiswa/edit/pekerjaan/:nrp',MahasiswaController.getPekerjaan);
+        this.router.get('/api/mahasiswa/edit/prestasi/:nrp',MahasiswaController.editPrestasi);
+        this.router.put('/api/mahasiswa/update/prestasi/:nrp',MahasiswaController.updatePrestasi);
+        this.router.delete('/api/mahasiswa/delete/prestasi/:id',MahasiswaController.deletePrestasi);
         this.router.post('/api/admin/create-master',AdminController.createMaster);
         this.router.post('/api/admin/create-admin', AdminController.createAdmin);
         this.router.get('/api/admin/get-all', AdminController.getAll);

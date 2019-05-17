@@ -1,6 +1,7 @@
 const routes = require('next-routes')
 
 module.exports = routes()
+    .add('dashboard', '/dashboard', 'dashboard')
     .add('home', '/','dataAlumni')
     .add('login','/login','login')
     .add('tes','/login/tes','dashboard')
@@ -16,8 +17,10 @@ module.exports = routes()
     .add('dataAdminJurusanCreate', '/data-admin-jurusan/create', 'dataAdminJurusan/create')
     .add('dataPekerjaan','/data-pekerjaan','dataPekerjaan')
     .add('dataPekerjaanCreate', '/data-pekerjaan/create', 'dataPekerjaan/create')
+    .add('dataPekerjaanEdit', '/data-pekerjaan/edit/:nrp', 'dataPekerjaan/edit')
     .add('dataPrestasi','/data-prestasi','dataPrestasi')
     .add('dataPrestasiCreate','/data-prestasi/create','dataPrestasi/create')
+    .add('dataPrestasiEdit', '/data-prestasi/edit/:nrp', 'dataPrestasi/edit')
     ;
 
 // module.exports=()=>{

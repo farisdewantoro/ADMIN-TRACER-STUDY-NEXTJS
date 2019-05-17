@@ -33,7 +33,9 @@ export const MAHASISWA = {
     getAll:'MAHASISWA:GETALL',
     edit:'MAHASISWA:EDIT',
     getAllPekerjaan:'MAHASISWA:GETALL-PEKERJAAN',
-    getAllPrestasi:'MAHASISWA:GETALL-PRESTASI'
+    getAllPrestasi:'MAHASISWA:GETALL-PRESTASI',
+    getPekerjaan:'MAHASISWA:GET-PEKERJAAN-BY-ID',
+    getPrestasi:"MAHASISWA:GET-PRESTASI"
 };
 
 // export const GET_ALL_JURUSAN = 'GET_ALL_JURUSAN';

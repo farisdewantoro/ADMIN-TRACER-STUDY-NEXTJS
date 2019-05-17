@@ -19,7 +19,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import PropTypes from 'prop-types';
-import {getAllPrestasi} from '../../actions/MahasiswaActions';
+import {getAllPrestasi,deletePrestasi} from '../../actions/MahasiswaActions';
 import DialogDelete from '../../components/common/DialogDelete';
 import moment from 'moment';
 import CreateIcon from '@material-ui/icons/Create';
@@ -51,7 +51,7 @@ class DataPrestasi extends Component {
       }
 
       dialogDeleteSubmit = ()=>{
-        this.props.deleteMahasiswa(this.state.mahasiswa_id);
+        this.props.deletePrestasi(this.state.mahasiswa_id);
       }
 
 
@@ -168,10 +168,11 @@ DataPrestasi.propTypes = {
     classes: PropTypes.object.isRequired,
     mahasiswas: PropTypes.object.isRequired,
     getAllPrestasi: PropTypes.func.isRequired,
+  deletePrestasi:PropTypes.func.isRequired
 }
 
 const mapStateToProps = (state) => ({
    mahasiswas:state.mahasiswas
 });
 
-export default compose(withStyles(styles), connect(mapStateToProps, {getAllPrestasi  }))(DataPrestasi);
+export default compose(withStyles(styles), connect(mapStateToProps, { deletePrestasi,getAllPrestasi  }))(DataPrestasi);

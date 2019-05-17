@@ -15,7 +15,8 @@ import {
     List,
     ListItem,
     ListItemSecondaryAction,
-    ListItemText
+    ListItemText,
+    Divider
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -74,63 +75,33 @@ class DataQuisoner extends Component {
                                                     {q.tahun}
                                                 </Typography>
                                         </div>
-
+                                    
                                         </ExpansionPanelSummary>
+                                        <Divider/>
                                         <ExpansionPanelDetails>
-                                            <List style={{ width: '100%' }}>
-                                                {/* {f.jurusan.map((j, i) => {
-                                                    return (
-                                                        <ListItem button style={{ borderRadius: 15 }}>
-                                                            <Typography style={
-                                                                {
-                                                                    margin: "0px 5px",
-                                                                    fontWeight: "bold"
-                                                                }
-                                                            }>
-                                                                {i + 1}.
-                                                      </Typography>
-                                                            <Typography style={
-                                                                {
-                                                                    margin: "0px 10px",
-                                                                    fontWeight: "bold"
-                                                                }
-                                                            }>
-                                                                Jurusan :
-                                                      </Typography>
-                                                            <Typography>
-                                                                {j.nama}
+                                            <List  style={{ width: '100%' }}>
+                                            {quisoners.q_user.map((qu,i)=>{
+                                                return(
+                                                    <ListItem key={qu.nrp}>
+                                                        <div style={{ display: 'flex' }}>
+                                                            <Typography style={{ margin: '0px 5px' }}>
+                                                                {i+1}.
                                                             </Typography>
-                                                            <Typography style={
-                                                                {
-                                                                    margin: "0px 10px",
-                                                                    fontWeight: "bold"
-                                                                }
-                                                            }>
-                                                                Prodi :
-                                                      </Typography>
-                                                            <Typography>
-                                                                {j.prodi}
+                                                            <Typography style={{margin:'0px 5px'}}>
+                                                                <span style={{ fontWeight: "bold" }}> NAMA :</span>   {qu.nama}
                                                             </Typography>
-                                                            <Typography style={
-                                                                {
-                                                                    margin: "0px 10px",
-                                                                    fontWeight: "bold"
-                                                                }
-                                                            }>
-                                                                Akreditasi :
-                                                      </Typography>
-                                                            <Typography>
-                                                                {j.akreditasi}
+                                                            <Typography style={{ margin: '0px 5px' }}>
+                                                                <span style={{ fontWeight: "bold" }}> NRP :</span> {qu.nrp}
                                                             </Typography>
-                                                            <ListItemSecondaryAction>
-                                                                <IconButton>
-                                                                    <DeleteIcon />
-                                                                </IconButton>
-                                                            </ListItemSecondaryAction>
-                                                        </ListItem>
-                                                    )
-                                                })} */}
+                                                        </div>
+
+                                                    </ListItem>
+                                                )
+                                           
+                                            })}
+
                                             </List>
+                                          
                                         </ExpansionPanelDetails>
                                     </ExpansionPanel>
                                 )

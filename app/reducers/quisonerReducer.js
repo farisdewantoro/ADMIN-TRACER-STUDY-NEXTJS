@@ -4,6 +4,7 @@ import {
 import isEmpty from '../lib/is-empty';
 const initialState = {
     quisoner: [],
+    q_user:[],
     loading: false
 };
 
@@ -14,6 +15,7 @@ export default function (state = initialState, action) {
             return{
                 ...state,
                 quisoner:action.payload.quisoner,
+                q_user: action.payload.q_user,
                 loading:false
             }
         case QUISONER.loading:

@@ -12,6 +12,126 @@ export const loadingMahasiswa = () => {
     }
 }
 
+export const updatePrestasi = (nrp,data)=>disbatch=>{
+    disbatch(loadingMahasiswa());
+    axios.put('/api/mahasiswa/update/prestasi/' + nrp, data)
+        .then(res => {
+            let notification = {
+                error: false,
+                message: "Success !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+            window.location.href = "/data-prestasi"
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+export const editPrestasi = (nrp)=>disbatch=>{
+    axios.get('/api/mahasiswa/edit/prestasi/' + nrp)
+        .then(res => {
+            disbatch({
+                type: MAHASISWA.getPrestasi,
+                payload: res.data
+            })
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+
+export const deletePrestasi = (id) => disbatch => {
+    disbatch(loadingMahasiswa());
+    axios.delete('/api/mahasiswa/delete/prestasi/' + id)
+        .then(res => {
+            let notification = {
+                error: false,
+                message: "Success !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+            window.location.href = "/data-prestasi"
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+export const deletePekerjaan = (id)=>disbatch=>{
+    disbatch(loadingMahasiswa());
+    axios.delete('/api/mahasiswa/delete/pekerjaan/' + id)
+        .then(res => {
+            let notification = {
+                error: false,
+                message: "Success !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+            window.location.href = "/data-pekerjaan"
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+export const updatePekerjaan = (nrp,data)=>disbatch=>{
+    disbatch(loadingMahasiswa());
+    axios.put('/api/mahasiswa/update/pekerjaan/'+nrp, data)
+        .then(res => {
+            let notification = {
+                error: false,
+                message: "Success !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+            window.location.href = "/data-pekerjaan"
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+export const editPekerjaan = (id)=>disbatch=>{
+    axios.get('/api/mahasiswa/edit/pekerjaan/'+id)
+        .then(res=>{
+            disbatch({
+                type:MAHASISWA.getPekerjaan,
+                payload:res.data
+            })
+        })
+        .catch(err => {
+            let notification = {
+                error: true,
+                message: "Error !",
+                notification: true
+            }
+            disbatch(setNotification(notification));
+        });
+}
+
 export const addPrestasi = (data) =>disbatch=>{
     disbatch(loadingMahasiswa());
     axios.post('/api/mahasiswa/add/prestasi',data)
@@ -61,7 +181,7 @@ export const getAllPrestasi = ()=>disbatch=>{
             disbatch({
                 type:MAHASISWA.getAllPrestasi,
                 payload:res.data
-            })
+            });
         })
         .catch(err => {
             let notification = {

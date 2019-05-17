@@ -28,6 +28,7 @@ import Link from 'next/link';
 import {connect} from 'react-redux';
 import {compose} from 'redux';
 import {logout} from '../../../actions/authActions';
+import DashboardIcon from '@material-ui/icons/Dashboard';
 const styles = theme => ({
     categoryHeader: {
         paddingTop: 16,
@@ -79,7 +80,7 @@ function Navigator(props) {
     let listMenu = [];
     if (props.auths.admin && typeof props.auths.admin.hak_akses !== "undefined" && props.auths.admin.hak_akses == "master"){
         listMenu =[
-            // { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
+            { id: 'Dashboard', icon: <DashboardIcon />, link: '/dashboard' },
             { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
             { id: 'Data Pekerjaan', icon: <WorkIcon />, link: '/data-pekerjaan' },
             { id: 'Data Prestasi', icon: <StarRateIcon />, link: '/data-prestasi' },
@@ -91,7 +92,7 @@ function Navigator(props) {
     }
     if (props.auths.admin && typeof props.auths.admin.hak_akses !== "undefined" && props.auths.admin.hak_akses == "admin") {
         listMenu = [
-            // { id: 'Identitas', icon: <PeopleIcon />, link: '/identitas', },
+            { id: 'Dashboard', icon: <DashboardIcon />, link: '/dashboard' },
             { id: 'Data Alumni', icon: <DnsRoundedIcon />, link: '/data-alumni' },
             { id: 'Data Pekerjaan', icon: <WorkIcon />, link: '/data-pekerjaan' },
             { id: 'Data Prestasi', icon: <StarRateIcon />, link: '/data-prestasi' },

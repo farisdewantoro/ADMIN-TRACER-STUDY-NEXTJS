@@ -41,6 +41,8 @@ class Mahasiswa{
         j.prodi
         order by m.created_at desc`;
         this.deleteMahasiswa = `DELETE FROM mahasiswa where id = ? `;
+        this.deletePekerjaan = `DELETE FROM pekerjaan where mahasiswa_id = ?`;
+        this.deletePrestasi = `DELETE FROM prestasi where mahasiswa_id = ? `;
         this.selectMahasiswa = `SELECT
         m.id,
         m.nrp,
@@ -63,7 +65,9 @@ class Mahasiswa{
         where m.nrp = ?
         `;
         this.addPekerjaan = `INSERT INTO pekerjaan set ?`;
+        this.updatePekerjaan = `UPDATE pekerjaan set ? where mahasiswa_id = ?`
         this.addPrestasi = `INSERT INTO prestasi set ?`;
+        this.updatePrestasi = `UPDATE prestasi set ? where mahasiswa_id = ?`;
         this.getAllPekerjaan = `SELECT
         m.id,
         m.nrp,
@@ -78,6 +82,22 @@ class Mahasiswa{
         left join mahasiswa as m on p.mahasiswa_id = m.id
         left join jurusan as j on m.jurusan_id = j.id
         order by m.created_at desc`;
+        this.getAllPekerjaanByNRP = `SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPerusahaan,
+        p.tanggalMasuk,
+        p.tempat,
+        p.jabatan,
+        j.nama as jurusan,
+        j.prodi,
+        j.id as jurusan_id
+        from pekerjaan as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        where m.nrp = ?
+        order by m.created_at desc`;
         this.getAllPrestasi =`
         SELECT
         m.id,
@@ -91,6 +111,23 @@ class Mahasiswa{
         from prestasi as p
         left join mahasiswa as m on p.mahasiswa_id = m.id
         left join jurusan as j on m.jurusan_id = j.id
+        order by m.created_at desc
+        `;
+        this.getPrestasiByNRP=`
+        SELECT
+        m.id,
+        m.nrp,
+        m.nama,
+        p.namaPrestasi,
+        p.jenisPrestasi,
+        p.tahun,
+        j.nama as jurusan,
+        j.prodi,
+          j.id as jurusan_id
+        from prestasi as p
+        left join mahasiswa as m on p.mahasiswa_id = m.id
+        left join jurusan as j on m.jurusan_id = j.id
+        where m.nrp = ?
         order by m.created_at desc
         `
     };

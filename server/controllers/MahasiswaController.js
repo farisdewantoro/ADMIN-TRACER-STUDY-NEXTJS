@@ -126,6 +126,51 @@ class MahasiswaController{
             }
         })
     }
+    deletePekerjaan(req,res){
+            let queryDelete = new MahasiswaModel().deletePekerjaan;
+        db.query(queryDelete,[req.params.id],(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    deletePrestasi(req, res) {
+        let queryDelete = new MahasiswaModel().deletePrestasi;
+        db.query(queryDelete, [req.params.id], (err, result) => {
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    
+    editPrestasi(req,res){
+        let querySelect = new MahasiswaModel().getPrestasiByNRP;
+
+        db.query(querySelect, [req.params.nrp], (err, result) => {
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    updatePrestasi(req,res){
+        let queryUpdate = new MahasiswaModel().updatePrestasi;
+        let data = {
+            mahasiswa_id: req.body.nrp.value,
+            namaPrestasi: req.body.namaPrestasi,
+            jenisPrestasi: req.body.jenisPrestasi,
+            tahun: req.body.tahun,
+        }
+
+        db.query(queryUpdate, [data, req.body.nrp.value], (err, result) => {
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
     addPrestasi(req,res){
         let queryInsert = new MahasiswaModel().addPrestasi;
         let data ={
@@ -164,6 +209,32 @@ class MahasiswaController{
             querySelectAll = new MahasiswaModel().getAllJurusanPekerjaan(req.user.jurusan_id);
         }
         db.query(querySelectAll,(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    getPekerjaan(req,res){
+        let querySelectAll = new MahasiswaModel().getAllPekerjaanByNRP;
+   
+        db.query(querySelectAll,[req.params.nrp],(err,result)=>{
+            if (err) return res.status(400).json(err);
+            if (result) {
+                return res.status(200).json(result);
+            }
+        })
+    }
+    updatePekerjaan(req,res){
+        let queryUpdate = new MahasiswaModel().updatePekerjaan;
+        let data = {
+            mahasiswa_id: req.body.nrp.value,
+            namaPerusahaan: req.body.namaPerusahaan,
+            tanggalMasuk: req.body.tanggalMasuk,
+            tempat: req.body.tempat,
+            jabatan: req.body.jabatan,
+        }
+        db.query(queryUpdate, [data, req.body.nrp.value], (err, result) => {
             if (err) return res.status(400).json(err);
             if (result) {
                 return res.status(200).json(result);
