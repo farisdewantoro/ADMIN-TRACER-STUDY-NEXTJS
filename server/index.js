@@ -73,10 +73,10 @@ nextApp.prepare().then(() => {
     //     const parsedUrl = parse(req.url,true);
     //     const {pathname, query = {} } = parsedUrl;
     //     const route = routes[pathname];
-      
+
     //     /**
     //      * Pull in front end routes and check request against those routes
-    //      * 
+    //      *
     //      */
     //     // if(route){
     //     //     return app.render(req,res,route.page,query);
@@ -96,8 +96,3 @@ nextApp.prepare().then(() => {
 
 
 // Server static assets if in production
-
-
-
-
-
